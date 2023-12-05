@@ -237,6 +237,103 @@ def generate_tests_data(num_rows, enterprise_points, potions, test_statuses, wor
 
     return data
 
+ingridients = [
+    ('Глаз паука', 3),
+    ('Сахар', None),
+    ('Грибы', None),
+    ('Магмакремень', None),
+    ('Красный порошок', None),
+    ('Блестящий порошок', None),
+    ('Костная мука', 4),
+    ('Медовая бутылка', None),
+    ('Паучье око', 3),
+    ('Золотая морковь', None),
+    ('Водная бутылка', None),
+    ('Красная пыльца', None),
+    ('Перо', 5),
+    ('Слизь', 2),
+    ('Золотой слиток', None)
+]
+
+living_things = [
+        (1, 'Other'),
+        (2, 'Slime'),
+        (3, 'Spider'),
+        (4, 'Skeleton'),
+        (5, 'Chicken')
+]
+
+
+potions = [
+        (0, 'Зелье регенерации', 0),
+        (1, 'Зелье инстант-регенерации', 1),
+        (2, 'Зелье силы', 2), (3, 'Зелье силы II', 3),
+        (4, 'Зелье огнестойкости', 4), ('Зелье огнестойкости II', 5),
+        (6, 'Зелье замедления', 6),
+        (7, 'Зелье восполнения', 7), (8, 'Зелье восполнения II', 8),
+        (9, 'Зелье урона', 9), (10, 'Зелье урона II', 10),
+        (11, 'Зелье бесполезности', 11), (12, 'Зелье бесполезности II', 12),
+        (13, 'Зелье беспризорности', 13), (14, 'Зелье беспризорности II', 14),
+        (15, 'Зелье невидимости', 15), (16, 'Зелье невидимости II', 16),
+        (17, 'Зелье ночного видения', 17), (18, 'Зелье ночного видения II', 18),
+        (19, 'Зелье замедленного падения', 19),
+        (20, 'Зелье обновления вдохновения', 20), (21, 'Зелье обновления вдохновения II', 21)
+]
+
+
+effects = [
+        (0, 'регенерации', 1, 60),
+        (1, 'инстант-регенерации', 2, 90),
+        (2, 'силы', 1, 60), (3, 'силы', 2, 90),
+        (4, 'огнестойкости', 1, 60),
+        (5, 'огнестойкости', 2, 90),
+        (6, 'Зелье замедления', 1, 60),
+        (7, 'восполнения', 1, 60), (8, 'восполнения', 2, 90),
+        (9, 'урона', 1, 60), (10, 'урона', 2, 90),
+        (11, 'бесполезности', 1, 60), (12, 'бесполезности', 2, 90),
+        (13, 'беспризорности', 1, 60), (14, 'беспризорности', 2, 90),
+        (15, 'невидимости', 1, 60), (16, 'невидимости', 2, 90),
+        (17, 'ночное видения', 1, 60), (18, 'ночного видения', 2, 90),
+        (19, 'замедленного падения', 1, 60),
+        (20, 'обновления вдохновения', 1, 60), (21, 'обновлениfя вдохновения', 2, 90)
+]
+
+
+enterprise_point_types = [
+        (0, 'shop'),
+        (1, 'issuing orders'),
+        (2, 'test')
+]
+
+
+tools_armors = [
+        (0, 'sword'),
+        (1, 'pickaxe')
+]
+
+
+statues = [
+    (0, 'Accepted'),
+    (1, 'Processing'),
+    (2, 'Review'),
+    (3, 'Passed')
+]
+
+
+peoples = generate_people_data(1000)
+customers = generate_customers(peoples)
+workers = generate_workers(peoples)
+enterprise_pointes = generate_enterprise_point_data(1000, enterprise_point_types)
+workers_posts = generate_workers_posts_data(1000, workers, posts, enterprise_pointes)
+orders = generate_orders_data(1000, customers, statues)
+orders_potions = generate_orders_potions_data(1000, potions, orders)
+enterprise_deliviers = generate_enterprise_deliviers_data(1000, enterprise_pointes, workers)
+deliviers_tools = generate_deliviers_tools_data(1000, enterprise_deliviers, tools_armors)
+deliviers_ingridients = generate_deliviers_ingridients_data(1000, enterprise_deliviers, ingridients)
+enterprise_point_coldwarehouse = generate_enterprise_point_warehouse_data(1000, enterprise_pointes, potions)
+enterprise_point_warehouse = generate_enterprise_point_ingredients_data(1000, enterprise_pointes, ingridients)
+# todo протестить нагенеренные данные
+
 
 #
 # # Вывод сгенерированных данных (можете закомментировать при необходимости)

@@ -109,11 +109,9 @@ def generate_workers_posts_data(num_rows, workers, posts, EPs):
     for id in range(num_rows):
         worker_id = random.choice(workers)[0]
         EP = random.choice(EPs)
-        post = random.choice(posts)
-        while(post[1] != EP[3]):
-            post = random.choice(posts)[0]
+        # post = random.choice(posts)
         EP_id = EP[0]
-        post_id = post[0]
+        post_id = EP[3]
         data.append((id, worker_id, EP_id, post_id))
     return data
 
@@ -191,7 +189,8 @@ def generate_enterprise_point_warehouse_data(num_rows, enterprise_points, potion
         ep_id = ep[0]
         random_potions = random.sample(potions, random.randint(0, 15))
 
-        for i in range(random_potions):
+
+        for i in random_potions:
             potion_id = i[0]
             amount_of_ingredient = random.randint(0, 50)
             if(amount_of_ingredient != 0):
@@ -210,7 +209,7 @@ def generate_enterprise_point_ingredients_data(num_rows, enterprise_points, ingr
         ep_id = ep[0]
         random_ingridients = random.sample(ingredients, random.randint(0, 15))
 
-        for i in range(random_ingridients):
+        for i in random_ingridients:
             ingridient_id = i[0]
             amount_of_ingredient = random.randint(0, 50)
             if(amount_of_ingredient != 0):
@@ -236,6 +235,10 @@ def generate_tests_data(num_rows, enterprise_points, potions, test_statuses, wor
         data.append((id, creation_time, potion_id, test_statuses_id, worker_id, living_thing_id, duration_sec))
 
     return data
+
+
+
+
 
 ingridients = [
     ('Глаз паука', 3),
@@ -306,55 +309,163 @@ enterprise_point_types = [
 ]
 
 
+posts = [
+    (0, 0),
+    (1, 1),
+    (2, 2)
+]
+
+
 tools_armors = [
         (0, 'sword'),
         (1, 'pickaxe')
 ]
 
 
-statues = [
+statuses = [
     (0, 'Accepted'),
     (1, 'Processing'),
     (2, 'Review'),
     (3, 'Passed')
 ]
 
+n = 1000
 
-peoples = generate_people_data(1000)
+peoples = generate_people_data(n)
 customers = generate_customers(peoples)
 workers = generate_workers(peoples)
-enterprise_pointes = generate_enterprise_point_data(1000, enterprise_point_types)
-workers_posts = generate_workers_posts_data(1000, workers, posts, enterprise_pointes)
-orders = generate_orders_data(1000, customers, statues)
-orders_potions = generate_orders_potions_data(1000, potions, orders)
-enterprise_deliviers = generate_enterprise_deliviers_data(1000, enterprise_pointes, workers)
-deliviers_tools = generate_deliviers_tools_data(1000, enterprise_deliviers, tools_armors)
-deliviers_ingridients = generate_deliviers_ingridients_data(1000, enterprise_deliviers, ingridients)
-enterprise_point_coldwarehouse = generate_enterprise_point_warehouse_data(1000, enterprise_pointes, potions)
-enterprise_point_warehouse = generate_enterprise_point_ingredients_data(1000, enterprise_pointes, ingridients)
-# todo протестить нагенеренные данные
+enterprise_pointes = generate_enterprise_point_data(n, enterprise_point_types)
+workers_posts = generate_workers_posts_data(n, workers, posts, enterprise_pointes)
+orders = generate_orders_data(n, customers, statuses)
+orders_potions = generate_orders_potions_data(n, potions, orders)
+enterprise_deliviers = generate_enterprise_deliviers_data(n, enterprise_pointes, workers)
+deliviers_tools = generate_deliviers_tools_data(n, enterprise_deliviers, tools_armors)
+deliviers_ingridients = generate_deliviers_ingridients_data(n, enterprise_deliviers, ingridients)
+enterprise_point_coldwarehouse = generate_enterprise_point_warehouse_data(n, enterprise_pointes, potions)
+enterprise_point_warehouse = generate_enterprise_point_ingredients_data(n, enterprise_pointes, ingridients)
 
+
+with open('example.txt', 'w') as file:
+    file.write('INSERT INTO' + ' peoples\n')
+    file.write('VALUES')
+    for i in peoples:
+        file.write(str(i))
+        if i != peoples[len(peoples) - 1]:
+            file.write(', \n')
+        else:file.write(';\n\n')
+
+    file.write('INSERT INTO' + ' customers\n')
+    file.write('VALUES')
+    for i in customers:
+        file.write(str(i))
+        if i != customers[len(customers) - 1]:
+            file.write(', \n')
+        else:file.write(';\n\n')
+
+    file.write('INSERT INTO' + ' workers\n')
+    file.write('VALUES')
+    for i in workers:
+        file.write(str(i))
+        if i != workers[len(workers) - 1]:
+            file.write(', \n')
+        else:file.write(';\n\n')
+
+    file.write('INSERT INTO' + ' enterprise_pointes\n')
+    file.write('VALUES')
+    for i in enterprise_pointes:
+        file.write(str(i))
+        if i != enterprise_pointes[len(enterprise_pointes) - 1]:
+            file.write(', \n')
+        else:file.write(';\n\n')
+
+    file.write('INSERT INTO' + ' workers_posts\n')
+    file.write('VALUES')
+    for i in workers_posts:
+        file.write(str(i))
+        if i != workers_posts[len(workers_posts) - 1]:
+            file.write(', \n')
+        else:
+            file.write(';\n\n')
+
+    file.write('INSERT INTO' + ' orders\n')
+    file.write('VALUES')
+    for i in orders:
+        file.write(str(i))
+        if i != orders[len(orders) - 1]:
+            file.write(', \n')
+        else:
+            file.write(';\n\n')
+
+    file.write('INSERT INTO' + ' orders_potions\n')
+    file.write('VALUES')
+    for i in orders_potions:
+        file.write(str(i))
+        if i != orders_potions[len(orders_potions) - 1]:
+            file.write(', \n')
+        else:
+            file.write(';\n\n')
+
+    file.write('INSERT INTO' + ' enterprise_deliviers\n')
+    file.write('VALUES')
+    for i in enterprise_deliviers:
+        file.write(str(i))
+        if i != enterprise_deliviers[len(enterprise_deliviers) - 1]:
+            file.write(', \n')
+        else:
+            file.write(';\n\n')
+
+    file.write('INSERT INTO' + ' deliviers_tools\n')
+    file.write('VALUES')
+    for i in deliviers_tools:
+        file.write(str(i))
+        if i != deliviers_tools[len(deliviers_tools) - 1]:
+            file.write(', \n')
+        else:
+            file.write(';\n\n')
+
+    file.write('INSERT INTO' + ' deliviers_ingridients\n')
+    file.write('VALUES')
+    for i in deliviers_ingridients:
+        file.write(str(i))
+        if i != deliviers_ingridients[len(deliviers_ingridients) - 1]:
+            file.write(', \n')
+        else:
+            file.write(';\n\n')
+
+    file.write('INSERT INTO' + ' enterprise_point_coldwarehouse\n')
+    file.write('VALUES')
+    for i in enterprise_point_coldwarehouse:
+        file.write(str(i))
+        if i != enterprise_point_coldwarehouse[len(enterprise_point_coldwarehouse) - 1]:
+            file.write(', \n')
+        else:
+            file.write(';\n\n')
+
+    file.write('INSERT INTO' + ' enterprise_point_warehouse\n')
+    file.write('VALUES')
+    for i in enterprise_point_warehouse:
+        file.write(str(i))
+        if i != enterprise_point_warehouse[len(enterprise_point_warehouse) - 1]:
+            file.write(', \n')
+        else:
+            file.write(';\n\n')
 
 #
 # # Вывод сгенерированных данных (можете закомментировать при необходимости)
-# print("People:", people_data)
-# print("Enterprise_Point_Type:", types_data)
-# print("Enterprise_Point:", enterprise_points_data)
-# print("Order_Status:", order_statuses_data)
-# print("Customers:", customers_data)
-# print("Workers:", workers_data)
-# print("Workers_Posts:", workers_posts_data)
-# print("Posts:", posts_data)
-# print("Enterprise_Deliveries:", deliveries_data)
-# print("Ingredients:", ingredients_data)
-# print("Potions:", potions_data)
-# print("Orders:", orders_data)
-# print("Enterprise_Point_Warehouse:", enterprise_point_warehouse_data)
-# print("Enterprise_Point_Ingredients:", enterprise_point_ingredients_data)
-# print("Deliveries_Ingredients:", deliveries_ingredients_data)
-# print("Tools_Armor:", tools_armor_data)
-# print("Deliveries_Tools:", deliveries_tools_data)
-# print("Tests:", tests_data)
-# print("Test_Status:", test_statuses_data)
-# print("Enterprise_Point_Warehouse:", enterprise_point_warehouse_data)
-# print("Enterprise_Point_Ingredients:", enterprise_point_ingredients_data)
+print("People:", peoples)
+print("Enterprise_Point_Type:", enterprise_point_types)
+print("Enterprise_Point:", enterprise_pointes)
+print("Order_Status:", statuses)
+print("Customers:", customers)
+print("Workers:", workers)
+print("Workers_Posts:", workers_posts)
+print("Posts:", posts)
+print("Enterprise_Deliveries:", enterprise_deliviers)
+print("Ingredients:", ingridients)
+print("Potions:", potions)
+print("Orders:", orders)
+print("Enterprise_Point_Warehouse:", enterprise_point_coldwarehouse)
+print("Enterprise_Point_Ingredients:", enterprise_point_warehouse)
+print("Deliveries_Ingredients:", deliviers_ingridients)
+print("Tools_Armor:", tools_armors)
+print("Deliveries_Tools:", deliviers_tools)

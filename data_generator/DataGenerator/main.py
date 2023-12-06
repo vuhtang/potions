@@ -354,7 +354,7 @@ test_statuses = [
 ]
 
 
-n = 500
+n = 20000
 
 peoples = generate_people_data(n)
 customers = generate_customers(peoples)
@@ -371,87 +371,86 @@ enterprise_point_warehouse = generate_enterprise_point_ingredients_data(n, enter
 tests = generate_tests_data(n, enterprise_pointes, potions, test_statuses, workers, living_things)
 
 
-with open('example.txt', 'w') as file:
+with open('test.txt', 'w') as file:
 
-
-    file.write('INSERT INTO' + ' living_things ' + '(id, name)\n')
-    file.write('VALUES')
-    for i in living_things:
-        file.write(str(i))
-        if i != living_things[len(living_things) - 1]:
-            file.write(', \n')
-        else:file.write(';\n\n')
-
-
-    file.write('INSERT INTO' + ' ingredients ' + '(id, name, living_thing_id)\n')
-    file.write('VALUES')
-    for i in ingridients:
-        file.write(str(i))
-        if i != ingridients[len(ingridients) - 1]:
-            file.write(', \n')
-        else:file.write(';\n\n')
-
-
-    file.write('INSERT INTO' + ' effects ' + '(id, name, power, duration)\n')
-    file.write('VALUES')
-    for i in effects:
-        file.write(str(i))
-        if i != effects[len(effects) - 1]:
-            file.write(', \n')
-        else:file.write(';\n\n')
-
-
-    file.write('INSERT INTO' + ' enterprise_point_type ' + '(id, type)\n')
-    file.write('VALUES')
-    for i in enterprise_point_types:
-        file.write(str(i))
-        if i != enterprise_point_types[len(enterprise_point_types) - 1]:
-            file.write(', \n')
-        else:file.write(';\n\n')
-
-
-    file.write('INSERT INTO' + ' posts ' + '(id, name, EPT_id)\n')
-    file.write('VALUES')
-    for i in posts:
-        file.write(str(i))
-        if i != posts[len(posts) - 1]:
-            file.write(', \n')
-        else:file.write(';\n\n')
-
-    file.write('INSERT INTO' + ' potions ' + '(id, name, effect_id)\n')
-    file.write('VALUES')
-    for i in potions:
-        file.write(str(i))
-        if i != potions[len(potions) - 1]:
-            file.write(', \n')
-        else:file.write(';\n\n')
-
-
-    file.write('INSERT INTO' + ' tools_armor ' + '(id, name)\n')
-    file.write('VALUES')
-    for i in tools_armors:
-        file.write(str(i))
-        if i != tools_armors[len(tools_armors) - 1]:
-            file.write(', \n')
-        else:file.write(';\n\n')
-
-
-    file.write('INSERT INTO' + ' order_status ' + '(id, status)\n')
-    file.write('VALUES')
-    for i in statuses:
-        file.write(str(i))
-        if i != statuses[len(statuses) - 1]:
-            file.write(', \n')
-        else:file.write(';\n\n')
-
-
-    file.write('INSERT INTO' + ' test_status ' + '(id, status)\n')
-    file.write('VALUES')
-    for i in test_statuses:
-        file.write(str(i))
-        if i != test_statuses[len(test_statuses) - 1]:
-            file.write(', \n')
-        else:file.write(';\n\n')
+    # file.write('INSERT INTO' + ' living_things ' + '(id, name)\n')
+    # file.write('VALUES')
+    # for i in living_things:
+    #     file.write(str(i))
+    #     if i != living_things[len(living_things) - 1]:
+    #         file.write(', \n')
+    #     else:file.write(';\n\n')
+    #
+    #
+    # file.write('INSERT INTO' + ' ingredients ' + '(id, name, living_thing_id)\n')
+    # file.write('VALUES')
+    # for i in ingridients:
+    #     file.write(str(i))
+    #     if i != ingridients[len(ingridients) - 1]:
+    #         file.write(', \n')
+    #     else:file.write(';\n\n')
+    #
+    #
+    # file.write('INSERT INTO' + ' effects ' + '(id, name, power, duration)\n')
+    # file.write('VALUES')
+    # for i in effects:
+    #     file.write(str(i))
+    #     if i != effects[len(effects) - 1]:
+    #         file.write(', \n')
+    #     else:file.write(';\n\n')
+    #
+    #
+    # file.write('INSERT INTO' + ' enterprise_point_type ' + '(id, type)\n')
+    # file.write('VALUES')
+    # for i in enterprise_point_types:
+    #     file.write(str(i))
+    #     if i != enterprise_point_types[len(enterprise_point_types) - 1]:
+    #         file.write(', \n')
+    #     else:file.write(';\n\n')
+    #
+    #
+    # file.write('INSERT INTO' + ' posts ' + '(id, name, EPT_id)\n')
+    # file.write('VALUES')
+    # for i in posts:
+    #     file.write(str(i))
+    #     if i != posts[len(posts) - 1]:
+    #         file.write(', \n')
+    #     else:file.write(';\n\n')
+    #
+    # file.write('INSERT INTO' + ' potions ' + '(id, name, effect_id)\n')
+    # file.write('VALUES')
+    # for i in potions:
+    #     file.write(str(i))
+    #     if i != potions[len(potions) - 1]:
+    #         file.write(', \n')
+    #     else:file.write(';\n\n')
+    #
+    #
+    # file.write('INSERT INTO' + ' tools_armor ' + '(id, name)\n')
+    # file.write('VALUES')
+    # for i in tools_armors:
+    #     file.write(str(i))
+    #     if i != tools_armors[len(tools_armors) - 1]:
+    #         file.write(', \n')
+    #     else:file.write(';\n\n')
+    #
+    #
+    # file.write('INSERT INTO' + ' order_status ' + '(id, status)\n')
+    # file.write('VALUES')
+    # for i in statuses:
+    #     file.write(str(i))
+    #     if i != statuses[len(statuses) - 1]:
+    #         file.write(', \n')
+    #     else:file.write(';\n\n')
+    #
+    #
+    # file.write('INSERT INTO' + ' test_status ' + '(id, status)\n')
+    # file.write('VALUES')
+    # for i in test_statuses:
+    #     file.write(str(i))
+    #     if i != test_statuses[len(test_statuses) - 1]:
+    #         file.write(', \n')
+    #     else:file.write(';\n\n')
 
 
     file.write('INSERT INTO' + ' people ' + '(id, name, surname, date_of_birth)\n')

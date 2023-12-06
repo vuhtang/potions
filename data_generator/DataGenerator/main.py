@@ -12,8 +12,9 @@ def generate_random_date(start_date, end_date):
 def generate_people_data(num_rows):
     data = []
     for id in range(num_rows):
-        name = fake.name()
-        surname = fake.name() + 'ov'
+        temp = fake.name().split(' ')
+        name = temp[0]
+        surname = temp[1]
         date_of_birth = fake.date_of_birth(minimum_age=14, maximum_age=60)
         data.append((id, name, surname, date_of_birth))
     return data
@@ -85,11 +86,13 @@ def generate_enterprise_deliviers_data(num_rows, points, workers):
     for id in range(num_rows):
         EP_from_id = random.choice(points)[0]
         EP_to_id = random.choice(points)[0]
+        # while EP_from_id == EP_to_id:
+        #     EP_to_id = random.choice(points)[0]
         courier_id = random.choice(workers)[0]
         creation_time = generate_random_date("2023-01-01", "2023-11-01")
         completion_time = generate_random_date("2023-01-01", "2023-11-01")
-        while (creation_time > completion_time):
-            completion_time = generate_random_date("2023-01-01", "2023-11-01")
+        # while (creation_time > completion_time):
+        #     completion_time = generate_random_date("2023-01-01", "2023-11-01")
         data.append((id, EP_from_id, EP_to_id, courier_id, creation_time, completion_time))
     return data
 
@@ -109,9 +112,15 @@ def generate_workers_posts_data(num_rows, workers, posts, EPs):
     for id in range(num_rows):
         worker_id = random.choice(workers)[0]
         EP = random.choice(EPs)
-        # post = random.choice(posts)
+        post = random.choice(posts)
         EP_id = EP[0]
-        post_id = EP[3]
+        while EP[3] != post[2]:
+            post = random.choice(posts)
+        post_id = post[0]
+        taking_date = generate_random_date("2021-01-01", "2023-11-01")
+        dismiss_date = generate_random_date("2021-01-01", "2023-12-01")
+        while (taking_date > dismiss_date):
+            dismiss_date = generate_random_date("2023-01-01", "2023-11-01")
         data.append((id, worker_id, EP_id, post_id))
     return data
 
@@ -227,10 +236,13 @@ def generate_tests_data(num_rows, enterprise_points, potions, test_statuses, wor
 
         creation_time = generate_random_date("2023-01-01", "2023-11-01")
         potion_id = random.choice(potions)[0]
-        test_statuses_id = random.choice(test_statuses)[0]
         worker_id = random.choice(workers)[0]
         living_thing_id = random.choice(living_things)[0]
         duration_sec = random.randint(40, 150)
+        if(duration_sec > 60 and duration_sec < 110):
+            test_statuses_id = 0
+        else:
+            test_statuses_id = 1
 
         data.append((id, creation_time, potion_id, test_statuses_id, worker_id, living_thing_id, duration_sec))
 
@@ -242,20 +254,20 @@ def generate_tests_data(num_rows, enterprise_points, potions, test_statuses, wor
 
 ingridients = [
     ('Глаз паука', 3),
-    ('Сахар', None),
-    ('Грибы', None),
-    ('Магмакремень', None),
-    ('Красный порошок', None),
-    ('Блестящий порошок', None),
+    ('Сахар', 'NULL'),
+    ('Грибы', 'NULL'),
+    ('Магмакремень', 'NULL'),
+    ('Красный порошок', 'NULL'),
+    ('Блестящий порошок', 'NULL'),
     ('Костная мука', 4),
-    ('Медовая бутылка', None),
+    ('Медовая бутылка', 'NULL'),
     ('Паучье око', 3),
-    ('Золотая морковь', None),
-    ('Водная бутылка', None),
-    ('Красная пыльца', None),
+    ('Золотая морковь', 'NULL'),
+    ('Водная бутылка', 'NULL'),
+    ('Красная пыльца', 'NULL'),
     ('Перо', 5),
     ('Слизь', 2),
-    ('Золотой слиток', None)
+    ('Золотой слиток', 'NULL')
 ]
 
 living_things = [
@@ -310,9 +322,10 @@ enterprise_point_types = [
 
 
 posts = [
-    (0, 0),
-    (1, 1),
-    (2, 2)
+    (0, 'seller', 0),
+    (1, 'deliver', 0),
+    (2, 'manager', 1),
+    (3, 'tester', 2)
 ]
 
 
@@ -329,7 +342,14 @@ statuses = [
     (3, 'Passed')
 ]
 
-n = 1000
+
+test_statuses = [
+    (0, 'Good ready'),
+    (1, 'Bad ready')
+]
+
+
+n = 5
 
 peoples = generate_people_data(n)
 customers = generate_customers(peoples)
@@ -343,10 +363,93 @@ deliviers_tools = generate_deliviers_tools_data(n, enterprise_deliviers, tools_a
 deliviers_ingridients = generate_deliviers_ingridients_data(n, enterprise_deliviers, ingridients)
 enterprise_point_coldwarehouse = generate_enterprise_point_warehouse_data(n, enterprise_pointes, potions)
 enterprise_point_warehouse = generate_enterprise_point_ingredients_data(n, enterprise_pointes, ingridients)
+tests = generate_tests_data(n, enterprise_pointes, potions, test_statuses, workers, living_things)
 
 
 with open('example.txt', 'w') as file:
-    file.write('INSERT INTO' + ' peoples\n')
+
+    file.write('INSERT INTO' + ' ingredients ' + '(id, name, living_thing_id)\n')
+    file.write('VALUES')
+    for i in ingridients:
+        file.write(str(i))
+        if i != ingridients[len(ingridients) - 1]:
+            file.write(', \n')
+        else:file.write(';\n\n')
+
+
+    file.write('INSERT INTO' + ' living_things ' + '(id, name)\n')
+    file.write('VALUES')
+    for i in living_things:
+        file.write(str(i))
+        if i != living_things[len(living_things) - 1]:
+            file.write(', \n')
+        else:file.write(';\n\n')
+
+
+    file.write('INSERT INTO' + ' effects ' + '(id, name, power, duration)\n')
+    file.write('VALUES')
+    for i in effects:
+        file.write(str(i))
+        if i != effects[len(effects) - 1]:
+            file.write(', \n')
+        else:file.write(';\n\n')
+
+
+    file.write('INSERT INTO' + ' enterprise_point_type ' + '(id, type)\n')
+    file.write('VALUES')
+    for i in enterprise_point_types:
+        file.write(str(i))
+        if i != enterprise_point_types[len(enterprise_point_types) - 1]:
+            file.write(', \n')
+        else:file.write(';\n\n')
+
+
+    file.write('INSERT INTO' + ' posts ' + '(id, name, EPT_id)\n')
+    file.write('VALUES')
+    for i in posts:
+        file.write(str(i))
+        if i != posts[len(posts) - 1]:
+            file.write(', \n')
+        else:file.write(';\n\n')
+
+
+    file.write('INSERT INTO' + ' potions ' + '(id, name, effect_id)\n')
+    file.write('VALUES')
+    for i in potions:
+        file.write(str(i))
+        if i != potions[len(potions) - 1]:
+            file.write(', \n')
+        else:file.write(';\n\n')
+
+
+    file.write('INSERT INTO' + ' tools_armor ' + '(id, name)\n')
+    file.write('VALUES')
+    for i in tools_armors:
+        file.write(str(i))
+        if i != tools_armors[len(tools_armors) - 1]:
+            file.write(', \n')
+        else:file.write(';\n\n')
+
+
+    file.write('INSERT INTO' + ' order_status ' + '(id, status)\n')
+    file.write('VALUES')
+    for i in statuses:
+        file.write(str(i))
+        if i != statuses[len(statuses) - 1]:
+            file.write(', \n')
+        else:file.write(';\n\n')
+
+
+    file.write('INSERT INTO' + ' test_status ' + '(id, status)\n')
+    file.write('VALUES')
+    for i in test_statuses:
+        file.write(str(i))
+        if i != test_statuses[len(test_statuses) - 1]:
+            file.write(', \n')
+        else:file.write(';\n\n')
+
+
+    file.write('INSERT INTO' + ' people ' + '(id, name, surname, date_of_birth)\n')
     file.write('VALUES')
     for i in peoples:
         file.write(str(i))
@@ -354,7 +457,7 @@ with open('example.txt', 'w') as file:
             file.write(', \n')
         else:file.write(';\n\n')
 
-    file.write('INSERT INTO' + ' customers\n')
+    file.write('INSERT INTO' + ' customers ' + '(id, human_id)\n')
     file.write('VALUES')
     for i in customers:
         file.write(str(i))
@@ -362,7 +465,7 @@ with open('example.txt', 'w') as file:
             file.write(', \n')
         else:file.write(';\n\n')
 
-    file.write('INSERT INTO' + ' workers\n')
+    file.write('INSERT INTO' + ' workers ' + '(id, human_id)\n')
     file.write('VALUES')
     for i in workers:
         file.write(str(i))
@@ -370,7 +473,7 @@ with open('example.txt', 'w') as file:
             file.write(', \n')
         else:file.write(';\n\n')
 
-    file.write('INSERT INTO' + ' enterprise_pointes\n')
+    file.write('INSERT INTO' + ' enterprise_point ' + '(id, name, location, type)\n')
     file.write('VALUES')
     for i in enterprise_pointes:
         file.write(str(i))
@@ -378,7 +481,7 @@ with open('example.txt', 'w') as file:
             file.write(', \n')
         else:file.write(';\n\n')
 
-    file.write('INSERT INTO' + ' workers_posts\n')
+    file.write('INSERT INTO' + ' workers_posts ' + '(id, worker_id, post_id, ep_id, taking_date, dismiss_date)\n')
     file.write('VALUES')
     for i in workers_posts:
         file.write(str(i))
@@ -387,7 +490,7 @@ with open('example.txt', 'w') as file:
         else:
             file.write(';\n\n')
 
-    file.write('INSERT INTO' + ' orders\n')
+    file.write('INSERT INTO' + ' orders ' + '(id, customer_id, order_status, creating_time, completion_time)\n')
     file.write('VALUES')
     for i in orders:
         file.write(str(i))
@@ -396,7 +499,7 @@ with open('example.txt', 'w') as file:
         else:
             file.write(';\n\n')
 
-    file.write('INSERT INTO' + ' orders_potions\n')
+    file.write('INSERT INTO' + ' orders_potions ' + '(id, order_id, Potion_id, amount_of_potions)\n')
     file.write('VALUES')
     for i in orders_potions:
         file.write(str(i))
@@ -405,7 +508,7 @@ with open('example.txt', 'w') as file:
         else:
             file.write(';\n\n')
 
-    file.write('INSERT INTO' + ' enterprise_deliviers\n')
+    file.write('INSERT INTO' + ' enterprise_deliveries ' + '(id, ep_from_id, ep_to_id, courier_id, creation_time, completion_time)\n')
     file.write('VALUES')
     for i in enterprise_deliviers:
         file.write(str(i))
@@ -414,7 +517,7 @@ with open('example.txt', 'w') as file:
         else:
             file.write(';\n\n')
 
-    file.write('INSERT INTO' + ' deliviers_tools\n')
+    file.write('INSERT INTO' + ' deliveries_tools ' + '(id, delivery_id, tool_id, amount_of_tools)\n')
     file.write('VALUES')
     for i in deliviers_tools:
         file.write(str(i))
@@ -423,7 +526,7 @@ with open('example.txt', 'w') as file:
         else:
             file.write(';\n\n')
 
-    file.write('INSERT INTO' + ' deliviers_ingridients\n')
+    file.write('INSERT INTO' + ' deliveries_ingredients ' + '(id, delivery_id, ingredient_id, amount_od_ingredient)\n')
     file.write('VALUES')
     for i in deliviers_ingridients:
         file.write(str(i))
@@ -432,7 +535,7 @@ with open('example.txt', 'w') as file:
         else:
             file.write(';\n\n')
 
-    file.write('INSERT INTO' + ' enterprise_point_coldwarehouse\n')
+    file.write('INSERT INTO' + ' enterprise_point_coldwarehouse ' + '(id, ep_id, potion_id, amount_of_ingredient)\n')
     file.write('VALUES')
     for i in enterprise_point_coldwarehouse:
         file.write(str(i))
@@ -441,11 +544,20 @@ with open('example.txt', 'w') as file:
         else:
             file.write(';\n\n')
 
-    file.write('INSERT INTO' + ' enterprise_point_warehouse\n')
+    file.write('INSERT INTO' + ' enterprise_point_warehouse ' + '(id, ep_id, ingredient_id, amount_of_ingredients)\n')
     file.write('VALUES')
     for i in enterprise_point_warehouse:
         file.write(str(i))
         if i != enterprise_point_warehouse[len(enterprise_point_warehouse) - 1]:
+            file.write(', \n')
+        else:
+            file.write(';\n\n')
+
+    file.write('INSERT INTO' + ' tests ' + '(id, potion_id, test_date, test_status, worker_id, living_thing_id, duration)\n')
+    file.write('VALUES')
+    for i in tests:
+        file.write(str(i))
+        if i != tests[len(tests) - 1]:
             file.write(', \n')
         else:
             file.write(';\n\n')

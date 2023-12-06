@@ -1,8 +1,8 @@
 CREATE TABLE People (
     Id SERIAL PRIMARY KEY,
     name VARCHAR(20) NOT NULL,
-    date_of_birth DATE,
-    date_of_death DATE
+    surname VARCHAR(20) NOT NULL,
+    date_of_birth DATE
 );
 
 CREATE TABLE Customers (
@@ -29,7 +29,7 @@ CREATE TABLE Enterprise_Point (
 
 CREATE TABLE Posts (
     id SERIAL PRIMARY KEY,
-    Name VARCHAR(255) NOT NULL,
+    Name VARCHAR(60) NOT NULL,
     EPT_id INT REFERENCES Enterprise_Point_Type (id) ON DELETE CASCADE
 );
 
@@ -60,9 +60,18 @@ CREATE TABLE Enterprise_Point_Warehouse (
     Amount_of_Ingredient INT
 );
 
-CREATE TABLE Enterprise_Point_Ingredients (
+
+CREATE TABLE Enterprise_Point_Coldwarehouse (
     Id SERIAL PRIMARY KEY,
     EP_id INT REFERENCES Enterprise_Point (id) ON DELETE CASCADE,
+    Potion_id INT REFERENCES Potions (id) ON DELETE CASCADE,
+    Amount_of_Ingredient INT
+);
+
+
+CREATE TABLE Enterprise_Point_Ingredients (
+    Id SERIAL PRIMARY KEY,
+    EPT_id INT REFERENCES Enterprise_Point_Type (id) ON DELETE CASCADE,
     Ingredient_id INT REFERENCES Ingredients (id) ON DELETE CASCADE
 );
 

@@ -1,7 +1,7 @@
 CREATE TABLE People (
     Id SERIAL PRIMARY KEY,
-    name VARCHAR(20) NOT NULL,
-    surname VARCHAR(20) NOT NULL,
+    name VARCHAR(40) NOT NULL,
+    surname VARCHAR(40) NOT NULL,
     date_of_birth DATE
 );
 
@@ -44,7 +44,7 @@ CREATE TABLE Workers_Posts (
 
 CREATE TABLE Living_Things (
     Id SERIAL PRIMARY KEY,
-    Name VARCHAR(40) NOT NULL,
+    Name VARCHAR(40) NOT NULL
 );
 
 CREATE TABLE Ingredients (
@@ -60,6 +60,18 @@ CREATE TABLE Enterprise_Point_Warehouse (
     Amount_of_Ingredient INT
 );
 
+CREATE TABLE Effects (
+    Id SERIAL PRIMARY KEY,
+    Name VARCHAR(60) NOT NULL,
+    Power INT,
+    Duration INT
+);
+
+CREATE TABLE Potions (
+    Id SERIAL PRIMARY KEY,
+    Name VARCHAR(60) NOT NULL,
+    Effect_id INT REFERENCES Effects (id) ON DELETE SET NULL
+);
 
 CREATE TABLE Enterprise_Point_Coldwarehouse (
     Id SERIAL PRIMARY KEY,
@@ -97,18 +109,6 @@ CREATE TABLE Enterprise_Deliveries (
     Completion_time TIMESTAMP WITHOUT TIME ZONE
 );
 
-CREATE TABLE Effects (
-    Id SERIAL PRIMARY KEY,
-    Name VARCHAR(60) NOT NULL,
-    Power INT,
-    Duration INT
-);
-
-CREATE TABLE Potions (
-    Id SERIAL PRIMARY KEY,
-    Name VARCHAR(60) NOT NULL,
-    Effect_id INT REFERENCES Effects (id) ON DELETE SET NULL
-);
 
 CREATE TABLE Orders_Potions (
     Id SERIAL PRIMARY KEY,

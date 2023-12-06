@@ -77,7 +77,7 @@ def generate_orders_potions_data(num_rows, potions, orders):
         potions_id = random.choice(potions)[0]
         order_id = random.choice(orders)[0]
         amount_of_potions = random.randint(1, 10)
-        data.append((id, potions_id, order_id, amount_of_potions))
+        data.append((id, order_id, potions_id, amount_of_potions))
     return data
 
 
@@ -123,7 +123,7 @@ def generate_workers_posts_data(num_rows, workers, posts, EPs):
             dismiss_date = generate_random_date("2023-01-01", "2023-11-01")
         taking_date = taking_date.strftime("%Y-%m-%d")
         dismiss_date = dismiss_date.strftime("%Y-%m-%d")
-        data.append((id, worker_id, EP_id, post_id, taking_date, dismiss_date))
+        data.append((id, worker_id, post_id, EP_id, taking_date, dismiss_date))
     return data
 
 
@@ -191,7 +191,7 @@ def generate_deliviers_tools_data(num_rows, deliviers, tools):
 # Генерация случайных данных для таблицы Enterprise_Point_Warehouse (Надо подумь так чтобы в зависимости от типа вносили продукты и количество логичное)
 def generate_enterprise_point_warehouse_data(num_rows, enterprise_points, potions):
     data = []
-
+    iter = 0
     for id in range(num_rows):
         ep = enterprise_points[id]
         if(ep[3] != 1):
@@ -205,13 +205,14 @@ def generate_enterprise_point_warehouse_data(num_rows, enterprise_points, potion
             potion_id = i[0]
             amount_of_ingredient = random.randint(0, 50)
             if(amount_of_ingredient != 0):
-                data.append((id, ep_id, potion_id, amount_of_ingredient))
+                data.append((iter, ep_id, potion_id, amount_of_ingredient))
+                iter+=1
     return data
 
 # Генерация случайных данных для таблицы Enterprise_Point_Ingredients (Ручками надо заполнить)
 def generate_enterprise_point_ingredients_data(num_rows, enterprise_points, ingredients):
     data = []
-
+    iter = 0
     for id in range(num_rows):
         ep = enterprise_points[id]
         if(ep[3] != 0):
@@ -224,7 +225,8 @@ def generate_enterprise_point_ingredients_data(num_rows, enterprise_points, ingr
             ingridient_id = i[0]
             amount_of_ingredient = random.randint(0, 50)
             if(amount_of_ingredient != 0):
-                data.append((id, ep_id, ingridient_id, amount_of_ingredient))
+                data.append((iter, ep_id, ingridient_id, amount_of_ingredient))
+                iter+=1
     return data
 
 
@@ -236,7 +238,7 @@ def generate_tests_data(num_rows, enterprise_points, potions, test_statuses, wor
         if(ep[3] != 2):
             continue
 
-        creation_time = (generate_random_date("2023-01-01", "2023-11-01")).strftime("%Y-%m-%d")
+        test_date = (generate_random_date("2023-01-01", "2023-11-01")).strftime("%Y-%m-%d")
         potion_id = random.choice(potions)[0]
         worker_id = random.choice(workers)[0]
         living_thing_id = random.choice(living_things)[0]
@@ -246,7 +248,7 @@ def generate_tests_data(num_rows, enterprise_points, potions, test_statuses, wor
         else:
             test_statuses_id = 1
 
-        data.append((id, creation_time, potion_id, test_statuses_id, worker_id, living_thing_id, duration_sec))
+        data.append((id, potion_id, test_date, test_statuses_id, worker_id, living_thing_id, duration_sec))
 
     return data
 
@@ -255,24 +257,25 @@ def generate_tests_data(num_rows, enterprise_points, potions, test_statuses, wor
 
 
 ingridients = [
-    ('Глаз паука', 3),
-    ('Сахар', 'NULL'),
-    ('Грибы', 'NULL'),
-    ('Магмакремень', 'NULL'),
-    ('Красный порошок', 'NULL'),
-    ('Блестящий порошок', 'NULL'),
-    ('Костная мука', 4),
-    ('Медовая бутылка', 'NULL'),
-    ('Паучье око', 3),
-    ('Золотая морковь', 'NULL'),
-    ('Водная бутылка', 'NULL'),
-    ('Красная пыльца', 'NULL'),
-    ('Перо', 5),
-    ('Слизь', 2),
-    ('Золотой слиток', 'NULL')
+    (0, 'Глаз паука', 3),
+    (1, 'Сахар', 1),
+    (2, 'Грибы', 1),
+    (3, 'Магмакремень', 1),
+    (4, 'Красный порошок', 1),
+    (5, 'Блестящий порошок', 1),
+    (6, 'Костная мука', 4),
+    (7, 'Медовая бутылка', 1),
+    (8, 'Паучье око', 3),
+    (9, 'Золотая морковь', 1),
+    (10, 'Водная бутылка', 1),
+    (11, 'Красная пыльца', 1),
+    (12, 'Перо', 5),
+    (13, 'Слизь', 2),
+    (14, 'Золотой слиток', 1)
 ]
 
 living_things = [
+        (0, 'temp'),
         (1, 'Other'),
         (2, 'Slime'),
         (3, 'Spider'),
@@ -351,7 +354,7 @@ test_statuses = [
 ]
 
 
-n = 10
+n = 500
 
 peoples = generate_people_data(n)
 customers = generate_customers(peoples)
@@ -370,20 +373,21 @@ tests = generate_tests_data(n, enterprise_pointes, potions, test_statuses, worke
 
 with open('example.txt', 'w') as file:
 
-    file.write('INSERT INTO' + ' ingredients ' + '(id, name, living_thing_id)\n')
-    file.write('VALUES')
-    for i in ingridients:
-        file.write(str(i))
-        if i != ingridients[len(ingridients) - 1]:
-            file.write(', \n')
-        else:file.write(';\n\n')
-
 
     file.write('INSERT INTO' + ' living_things ' + '(id, name)\n')
     file.write('VALUES')
     for i in living_things:
         file.write(str(i))
         if i != living_things[len(living_things) - 1]:
+            file.write(', \n')
+        else:file.write(';\n\n')
+
+
+    file.write('INSERT INTO' + ' ingredients ' + '(id, name, living_thing_id)\n')
+    file.write('VALUES')
+    for i in ingridients:
+        file.write(str(i))
+        if i != ingridients[len(ingridients) - 1]:
             file.write(', \n')
         else:file.write(';\n\n')
 
@@ -413,7 +417,6 @@ with open('example.txt', 'w') as file:
         if i != posts[len(posts) - 1]:
             file.write(', \n')
         else:file.write(';\n\n')
-
 
     file.write('INSERT INTO' + ' potions ' + '(id, name, effect_id)\n')
     file.write('VALUES')
@@ -492,7 +495,7 @@ with open('example.txt', 'w') as file:
         else:
             file.write(';\n\n')
 
-    file.write('INSERT INTO' + ' orders ' + '(id, customer_id, order_status, creating_time, completion_time)\n')
+    file.write('INSERT INTO' + ' orders ' + '(id, customer_id, order_status, creation_time, completion_time)\n')
     file.write('VALUES')
     for i in orders:
         file.write(str(i))
@@ -528,7 +531,7 @@ with open('example.txt', 'w') as file:
         else:
             file.write(';\n\n')
 
-    file.write('INSERT INTO' + ' deliveries_ingredients ' + '(id, delivery_id, ingredient_id, amount_od_ingredient)\n')
+    file.write('INSERT INTO' + ' deliveries_ingredients ' + '(id, delivery_id, ingredient_id, amount_of_ingredient)\n')
     file.write('VALUES')
     for i in deliviers_ingridients:
         file.write(str(i))
@@ -546,7 +549,7 @@ with open('example.txt', 'w') as file:
         else:
             file.write(';\n\n')
 
-    file.write('INSERT INTO' + ' enterprise_point_warehouse ' + '(id, ep_id, ingredient_id, amount_of_ingredients)\n')
+    file.write('INSERT INTO' + ' enterprise_point_warehouse ' + '(id, ep_id, ingredient_id, amount_of_ingredient)\n')
     file.write('VALUES')
     for i in enterprise_point_warehouse:
         file.write(str(i))

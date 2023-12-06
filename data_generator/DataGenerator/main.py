@@ -24,7 +24,7 @@ def generate_customers(peoples):
     data = []
     temp = random.sample(peoples, len(peoples) // 2)
     for id in range(len(peoples)//2):
-        data.append((id, temp[id]))
+        data.append((id, temp[id][0]))
     return data
 
 
@@ -32,7 +32,7 @@ def generate_workers(peoples):
     data = []
     temp = random.sample(peoples, len(peoples) // 5)
     for id in range(len(peoples)//5):
-        data.append((id, temp[id]))
+        data.append((id, temp[id][0]))
     return data
 
 

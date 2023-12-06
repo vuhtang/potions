@@ -15,7 +15,7 @@ def generate_people_data(num_rows):
         temp = fake.name().split(' ')
         name = temp[0]
         surname = temp[1]
-        date_of_birth = fake.date_of_birth(minimum_age=14, maximum_age=60)
+        date_of_birth = (fake.date_of_birth(minimum_age=14, maximum_age=60)).strftime("%Y-%m-%d")
         data.append((id, name, surname, date_of_birth))
     return data
 
@@ -62,11 +62,11 @@ def generate_orders_data(num_rows, customers, statuses):
     for id in range(num_rows):
         customer_id = random.choice(customers)[0]
         order_status = random.choice(statuses)[0]
-        creation_time = generate_random_date("2023-01-01", "2023-11-01")
+        creation_time = generate_random_date("2023-01-01", "2023-11-01").strftime("%Y-%m-%d %H:%M:%S")
         if (order_status == 'Passed'):
             completion_time = creation_time + timedelta(days=random.randint(1, 30))
         else:
-            completion_time = generate_random_date("2099-01-01", "2099-01-01")
+            completion_time = generate_random_date("2099-01-01", "2099-01-01").strftime("%Y-%m-%d %H:%M:%S")
         data.append((id, customer_id, order_status, creation_time, completion_time))
     return data
 
@@ -86,13 +86,13 @@ def generate_enterprise_deliviers_data(num_rows, points, workers):
     for id in range(num_rows):
         EP_from_id = random.choice(points)[0]
         EP_to_id = random.choice(points)[0]
-        # while EP_from_id == EP_to_id:
-        #     EP_to_id = random.choice(points)[0]
+        while EP_from_id == EP_to_id:
+            EP_to_id = random.choice(points)[0]
         courier_id = random.choice(workers)[0]
-        creation_time = generate_random_date("2023-01-01", "2023-11-01")
-        completion_time = generate_random_date("2023-01-01", "2023-11-01")
-        # while (creation_time > completion_time):
-        #     completion_time = generate_random_date("2023-01-01", "2023-11-01")
+        creation_time = generate_random_date("2023-01-01", "2023-11-01").strftime("%Y-%m-%d %H:%M:%S")
+        completion_time = generate_random_date("2023-01-01", "2023-11-01").strftime("%Y-%m-%d %H:%M:%S")
+        while (creation_time > completion_time):
+            completion_time = generate_random_date("2023-01-01", "2023-11-01").strftime("%Y-%m-%d %H:%M:%S")
         data.append((id, EP_from_id, EP_to_id, courier_id, creation_time, completion_time))
     return data
 
@@ -121,7 +121,9 @@ def generate_workers_posts_data(num_rows, workers, posts, EPs):
         dismiss_date = generate_random_date("2021-01-01", "2023-12-01")
         while (taking_date > dismiss_date):
             dismiss_date = generate_random_date("2023-01-01", "2023-11-01")
-        data.append((id, worker_id, EP_id, post_id))
+        taking_date = taking_date.strftime("%Y-%m-%d")
+        dismiss_date = dismiss_date.strftime("%Y-%m-%d")
+        data.append((id, worker_id, EP_id, post_id, taking_date, dismiss_date))
     return data
 
 
@@ -173,17 +175,17 @@ def generate_deliviers_tools_data(num_rows, deliviers, tools):
 
 
 # Генерация случайных данных для таблицы Tests
-def generate_tests_data(num_rows, potions, statuses, workers, living_things):
-    data = []
-    for _ in range(num_rows):
-        potion_id = random.choice(potions)[0]
-        test_date = generate_random_date("2023-01-01", "2023-11-01")
-        test_status = random.choice(statuses)[0]
-        worker_id = random.choice(workers)[0]
-        living_thing_id = random.choice(living_things)[0]
-        duration = random.randint(1, 10)
-        data.append((potion_id, test_date, test_status, worker_id, living_thing_id, duration))
-    return data
+# def generate_tests_data(num_rows, potions, statuses, workers, living_things):
+#     data = []
+#     for id in range(num_rows):
+#         potion_id = random.choice(potions)[0]
+#         test_date = (generate_random_date("2023-01-01", "2023-11-01")).strftime("%Y-%m-%d")
+#         test_status = random.choice(statuses)[0]
+#         worker_id = random.choice(workers)[0]
+#         living_thing_id = random.choice(living_things)[0]
+#         duration = random.randint(1, 10)
+#         data.append((id, potion_id, test_date, test_status, worker_id, living_thing_id, duration))
+#     return data
 
 
 # Генерация случайных данных для таблицы Enterprise_Point_Warehouse (Надо подумь так чтобы в зависимости от типа вносили продукты и количество логичное)
@@ -234,7 +236,7 @@ def generate_tests_data(num_rows, enterprise_points, potions, test_statuses, wor
         if(ep[3] != 2):
             continue
 
-        creation_time = generate_random_date("2023-01-01", "2023-11-01")
+        creation_time = (generate_random_date("2023-01-01", "2023-11-01")).strftime("%Y-%m-%d")
         potion_id = random.choice(potions)[0]
         worker_id = random.choice(workers)[0]
         living_thing_id = random.choice(living_things)[0]
@@ -283,7 +285,7 @@ potions = [
         (0, 'Зелье регенерации', 0),
         (1, 'Зелье инстант-регенерации', 1),
         (2, 'Зелье силы', 2), (3, 'Зелье силы II', 3),
-        (4, 'Зелье огнестойкости', 4), ('Зелье огнестойкости II', 5),
+        (4, 'Зелье огнестойкости', 4), (5, 'Зелье огнестойкости II', 5),
         (6, 'Зелье замедления', 6),
         (7, 'Зелье восполнения', 7), (8, 'Зелье восполнения II', 8),
         (9, 'Зелье урона', 9), (10, 'Зелье урона II', 10),
@@ -349,7 +351,7 @@ test_statuses = [
 ]
 
 
-n = 5
+n = 10
 
 peoples = generate_people_data(n)
 customers = generate_customers(peoples)

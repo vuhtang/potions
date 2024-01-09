@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <link rel="stylesheet" href="styles/start.css">
+    <link rel="stylesheet" href="styles/general.css">
+</head>
+<body>
+
+<div class="welcome-block">
+    <h1>Добро пожаловать на наш сайт!</h1>
+    <p>Наши зелья лучшие на рынке</p>
+</div>
+
+<div class="links-container">
+    <canvas id="levitatingCanvas2" class="potion" width="350" height="350"></canvas>
+
+    <a href="#" class="buttons" id="redirectStatusButton">Проверить статус заказа</a>
+    <a href="#" class="buttons" id="redirectOrderButton">Оформить заказ</a>
+
+    <canvas id="levitatingCanvas1" class="potion" width="350" height="350"></canvas>
+</div>
+
+
+<script>
+    document.getElementById("redirectStatusButton").addEventListener("click", function() {
+        window.location.href = "https://example.com";
+    });
+
+    document.getElementById("redirectOrderButton").addEventListener("click", function() {
+        window.location.href = "https://example.com";
+    });
+</script>
+
+<script>
+    const canvas = document.getElementById('levitatingCanvas1');
+    const context = canvas.getContext('2d');
+    const image = new Image();
+
+    image.src = 'qwer1.png';
+
+    image.onload = function() {
+        animate();
+    };
+
+    function animate() {
+        requestAnimationFrame(animate);
+        context.clearRect(0, 0, canvas.width, canvas.height);
+        context.drawImage(image, 150, Math.sin(Date.now() * 0.002) * 20 + 100, 200, 200);
+    }
+</script>
+
+<script>
+    const canvass = document.getElementById('levitatingCanvas2');
+    const contextt = canvass.getContext('2d');
+    const imagee = new Image();
+
+    imagee.src = 'qwer2.png';
+
+    imagee.onload = function() {
+        animate2();
+    };
+
+    function animate2() {
+        requestAnimationFrame(animate2);
+        contextt.clearRect(0, 0, canvass.width, canvass.height);
+        contextt.drawImage(imagee, 0, Math.sin(Date.now() * 0.002) * 20 + 100, 200, 200);
+    }
+</script>
+
+</body>
+</html>

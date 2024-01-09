@@ -1,0 +1,6 @@
+body {
+    background-color: #333; /* Тёмно-серый цвет фона */
+    color: #fff; /* Белый цвет текста для контраста */
+    margin: 0; /* Убирает внешние отступы у body */
+    font-family: Arial, sans-serif; /* Шрифт текста */
+}

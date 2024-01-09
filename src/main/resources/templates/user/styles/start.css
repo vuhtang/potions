@@ -1,0 +1,74 @@
+a.buttons {
+    padding: 3px 14px;
+    -webkit-box-shadow: rgba(0, 0, 0, 0.701961) 0px 5px 12px;
+    -webkit-transform-origin: 50% 1px;
+    -webkit-transition: all 0.15s ease-in-out;
+    background:  #161616;
+    border-color: rgba(255, 255, 255, 0.027451) #FF8C39 rgba(255, 255, 255, 0.027451) rgba(255, 255, 255, 0.027451);
+    border-style: solid;
+    border-width: 1px 4px 1px 1px;
+    box-shadow: rgba(0, 0, 0, 0.701961) 0px 5px 12px;
+    color: #b6b0b0;
+    display:block;
+    width:180px;
+    height:60px;
+    font-family: Open Sans, Sans-serif;
+    border-radius: 15px;
+    font-size: 13px;
+    letter-spacing: 7px;
+    text-shadow: rgb(255, 255, 255) 0px 1px 1px;
+    line-height: 30px;
+    position: relative;
+    margin: 20px auto;
+    text-align: center;
+    text-decoration:none;
+    justify-content: center;
+}
+a.buttons:hover {
+    cursor: pointer;
+    opacity: 0.9;
+    border-width: 1px 7px 1px 1px;
+}
+a.buttons:active {
+    -webkit-box-shadow:inset rgba(0, 0, 0, 0.701961) 0px 7px 12px,rgba(0, 0, 0, 0.701961) 0px 2px 12px  ;
+    text-shadow: rgb(0, 0, 0) 0px -2px 1px;
+    margin-top: 1px;
+}
+
+body {
+    display: grid;
+    place-items: center;
+    height: 100vh;
+    margin: 0;
+}
+.links-container {
+    display: flex;
+    gap: 30px;
+    text-align: center;
+    text-decoration:none;
+}
+
+.welcome-block {
+    text-align: center;
+}
+
+h1 {
+    font-size: 3em;
+    margin-bottom: 10px;
+    font-weight: bold;
+    /*text-shadow: 2px 2px 2px #888;*/
+    color: #eeab28;
+}
+
+p {
+    font-size: 1.5em;
+    color: #777;
+    text-shadow: 1px 1px 1px #ccc;
+}
+
+.rounded-box {
+    border-radius: 10px;
+    padding: 20px;
+    background-color: #fff;
+    box-shadow: 0 0 20px rgba(0, 0, 0, 0.1);
+}

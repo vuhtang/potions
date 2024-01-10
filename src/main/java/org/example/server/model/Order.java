@@ -16,17 +16,19 @@ public class Order {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
 
-    @Column(name = "Customer_id", nullable = false)
-    private int customer_id;
+    @ManyToOne (fetch = FetchType.LAZY)
+    @JoinColumn(name = "customer_id", referencedColumnName = "id", nullable = false)
+    private Customer customer_id;
 
-    @Column(name = "Creation_time")
+    @Column(name = "creation_time")
     private String creation_time;
 
-    @Column(name = "Completion_time")
+    @Column(name = "completion_time")
     private String completion_time;
 
-    @Column(name = "Order_status", nullable = false)
-    private int status;
+    @ManyToOne (fetch = FetchType.LAZY)
+    @JoinColumn(name = "order_status", referencedColumnName = "id", nullable = false)
+    private OrderStatus status;
 }
 
 //todo подумать над FK

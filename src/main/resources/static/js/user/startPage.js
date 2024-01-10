@@ -1,9 +1,9 @@
 document.getElementById("redirectStatusButton").addEventListener("click", function() {
-    window.location.href = "http://localhost:8080/user/checkStatusPage";
+    window.location.href = "http://localhost:8080/orders/checkStatusPage";
 });
 
 document.getElementById("redirectOrderButton").addEventListener("click", function() {
-    window.location.href = "https://example.com";
+    window.location.href = "http://localhost:8080/orders/createFormPage";
 });
 
 // const canvas = document.getElementById('levitatingCanvas1');

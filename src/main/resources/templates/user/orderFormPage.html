@@ -4,19 +4,22 @@
     <meta charset="UTF-8">
     <title>Title</title>
     <link th:href="@{/styles/user/general.css}" rel="stylesheet"/>
+    <link th:href="@{/styles/user/tableCartList.css}" rel="stylesheet"/>
     <link th:href="@{/styles/user/inputSpace.css}" rel="stylesheet"/>
+    <link th:href="@{/styles/user/formPage.css}" rel="stylesheet"/>
 </head>
 <body>
 
 
 <div class="text-field text-field_floating-3">
     <!--    todo дописать форму для отправки на контроллер-->
-    <form>
+    <form  id="createOrderForm" method="POST" action="http://localhost:8080/orders/createOrder">
         <input class="text-field__input" type="userName" id="userName" name="userName">
-        <label class="text-field__label" for="userName">Номер заказа</label>
+        <label class="text-field__label" for="userName">Введите свой никнейм</label>
+        <input type="hidden" id="cartInput" name="cartInput" th:value="${cart.getItems()}">
     </form>
 </div>
-<h2>Выбранные зелья</h2>
+<h2>Выбранные зелья:</h2>
 <div class="selected-items tbl-header">
     <table>
         <thead>
@@ -31,15 +34,15 @@
 <div class="selected-items tbl-content">
     <table>
         <tbody>
-        <tr th:each="item : ${cart.items}">
+        <tr th:each="item : ${cart.getItems()}">
             <td th:text="${item.potion.name}"></td>
             <td>
-                <button onclick="decrement('${item}')">-</button>
+                <button th:action="${cart.decCount(item)}">-</button>
                 <span th:text="${item.count}"></span>
-                <button onclick="increment('${item}')">+</button>
+                <button th:action="${cart.incCount(item)}">+</button>
             </td>
             <td>
-                <form th:action="removeItem('${item}')" method="post">
+                <form th:action="${cart.deleteItem(item)}" method="post">
                     <input type="hidden" name="potionId" th:value="${item}"/>
                     <button type="submit">Удалить</button>
                 </form>
@@ -50,21 +53,27 @@
 </div>
 
 <div class="all-items">
-    <h2>Список доступных зелий</h2>
+    <a href="#" class="buttons" id="potionsList">Список доступных зелий</a>
     <div class="item-list">
-        <ul>
-            <li th:each="item : ${cart.items}">
-                <span th:text="${item.name}"></span>
-                <button onclick="addItem('${item}')">Добавить</button>
-            </li>
+        <ul id="dropdownList" style="display: none">
+<!--            <li th:each="item : ${cart.getItems()}">-->
+<!--                <span th:text="${item.potion.name}"></span>-->
+<!--                <button th:action="${cart.addItem(item)}">Добавить</button>-->
+<!--            </li>-->
+            <li>1</li>
+            <li>2</li>
+            <li>3</li>
         </ul>
     </div>
 </div>
 
 <a href="#" class="buttons" id="createOrder">Оформить заказ</a>
-<a href="#" class="buttons" id="redirectBackButton">Назад</a>
+<a href="#" class="buttons" id="redirectBackButton">На главную</a>
 
 <script th:src="@{/js/user/cartList.js}"></script>
 <script th:src="@{/js/user/orderForm.js}"></script>
+<script th:src="@{/js/user/orderFormPage.js}"></script>
+<script th:src="@{/js/user/goto.js}"></script>
+<script th:src="@{/js/user/dropList.js}"></script>
 </body>
 </html>

@@ -14,32 +14,32 @@ import java.sql.Date;
 @Getter
 @NoArgsConstructor
 @Entity
-@Table(name = "Tests")
+@Table(name = "tests")
 public class Test {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
 
     @ManyToOne
-    @JoinColumn(name = "Potion_id", referencedColumnName = "id", nullable = false)
+    @JoinColumn(name = "potion_id", referencedColumnName = "id", nullable = false)
     private Potion potion;
 
-    @Column(name = "Test_date")
+    @Column(name = "test_date")
     private Date testDate;
 
     @ManyToOne
-    @JoinColumn(name = "Test_status", referencedColumnName = "id", nullable = false)
+    @JoinColumn(name = "test_status", referencedColumnName = "id", nullable = false)
     private TestStatus testStatus;
 
     @ManyToOne
-    @JoinColumn(name = "Worker_id", referencedColumnName = "id", nullable = false)
+    @JoinColumn(name = "worker_id", referencedColumnName = "id", nullable = false)
     private Worker worker;
 
     @ManyToOne
-    @JoinColumn(name = "Living_Thing_id", referencedColumnName = "id")
+    @JoinColumn(name = "living_thing_id", referencedColumnName = "id")
     private LivingThing livingThing;
 
-    @Column(name = "Duration")
+    @Column(name = "duration")
     private int duration;
 }

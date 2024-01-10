@@ -7,27 +7,29 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 import org.example.server.model.entities.Customer;
 
+import java.sql.Timestamp;
+
 @Setter
 @Getter
 @NoArgsConstructor
 @Entity
-@Table(name = "Orders")
+@Table(name = "orders")
 public class Order {
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
-    private Long id;
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Integer id;
 
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "Customer_id", referencedColumnName = "id", nullable = false)
+    @JoinColumn(name = "customer_id", referencedColumnName = "id", nullable = false)
     private Customer customer_id;
 
-    @Column(name = "Creation_time")
-    private String creation_time;
+    @Column(name = "creation_time")
+    private Timestamp creation_time;
 
-    @Column(name = "Completion_time")
-    private String completion_time;
+    @Column(name = "completion_time")
+    private Timestamp completion_time;
 
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "Order_status", referencedColumnName = "id", nullable = false)
+    @JoinColumn(name = "order_status", referencedColumnName = "id", nullable = false)
     private OrderStatus status;
 }

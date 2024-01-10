@@ -13,28 +13,28 @@ import java.sql.Timestamp;
 @Getter
 @NoArgsConstructor
 @Entity
-@Table(name = "Enterprise_Deliveries")
+@Table(name = "enterprise_deliveries")
 public class EnterpriseDelivery {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
-    private int id;
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Integer id;
 
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "EP_from_id", referencedColumnName = "id", nullable = false)
+    @JoinColumn(name = "ep_from_id", referencedColumnName = "id", nullable = false)
     private EnterprisePoint enterprisePointFrom;
 
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "EP_to_id", referencedColumnName = "id", nullable = false)
+    @JoinColumn(name = "ep_to_id", referencedColumnName = "id", nullable = false)
     private EnterprisePoint enterprisePointTo;
 
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "Courier_id", referencedColumnName = "id", nullable = false)
+    @JoinColumn(name = "courier_id", referencedColumnName = "id", nullable = false)
     private Worker courier;
 
-    @Column(name = "Creation_time")
+    @Column(name = "creation_time")
     private Timestamp creationTime;
 
-    @Column(name = "Completion_time")
+    @Column(name = "completion_time")
     private Timestamp completionTime;
 }

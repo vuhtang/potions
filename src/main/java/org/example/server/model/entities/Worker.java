@@ -10,13 +10,13 @@ import org.example.server.model.entities.Human;
 @Getter
 @NoArgsConstructor
 @Entity
-@Table(name = "Workers")
+@Table(name = "workers")
 public class Worker {
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
-    private int id;
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Integer id;
 
     @OneToOne(cascade = CascadeType.ALL)
-    @JoinColumn(name = "Human_id", referencedColumnName = "id", nullable = false)
+    @JoinColumn(name = "human_id", referencedColumnName = "id", nullable = false)
     private Human human;
 }

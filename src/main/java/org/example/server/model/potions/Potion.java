@@ -10,16 +10,16 @@ import lombok.Setter;
 @Getter
 @NoArgsConstructor
 @Entity
-@Table(name = "Potions")
+@Table(name = "potions")
 public class Potion {
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
-    private Long id;
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Integer id;
 
-    @Column(name = "Name", nullable = false)
+    @Column(name = "name", nullable = false)
     private String name;
 
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "Effect_id", referencedColumnName = "id", nullable = false)
+    @JoinColumn(name = "effect_id", referencedColumnName = "id", nullable = false)
     private Effect effect;
 }

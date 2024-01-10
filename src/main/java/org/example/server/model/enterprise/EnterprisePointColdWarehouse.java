@@ -10,21 +10,21 @@ import org.example.server.model.potions.Potion;
 @Getter
 @NoArgsConstructor
 @Entity
-@Table(name = "Enterprise_Point_Coldwarehouse")
+@Table(name = "enterprise_point_coldwarehouse")
 public class EnterprisePointColdWarehouse {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
-    private int id;
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Integer id;
 
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "EP_id", referencedColumnName = "id", nullable = false)
+    @JoinColumn(name = "ep_id", referencedColumnName = "id", nullable = false)
     private EnterprisePoint enterprisePoint;
 
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "Potion_id", referencedColumnName = "id", nullable = false)
+    @JoinColumn(name = "potion_id", referencedColumnName = "id", nullable = false)
     private Potion potion;
 
-    @Column(name = "Amount_of_Ingredient")
+    @Column(name = "amount_of_ingredient")
     private int amountOfPotions;
 }

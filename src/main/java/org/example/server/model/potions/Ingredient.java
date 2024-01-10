@@ -10,17 +10,17 @@ import org.example.server.model.entities.LivingThing;
 @Getter
 @NoArgsConstructor
 @Entity
-@Table(name = "Ingredients")
+@Table(name = "ingredients")
 public class Ingredient {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
 
-    @Column(name = "Name")
+    @Column(name = "name")
     private String name;
 
     @ManyToOne
-    @JoinColumn(name = "Living_Thing_id", referencedColumnName = "id")
+    @JoinColumn(name = "living_thing_id", referencedColumnName = "id")
     private LivingThing livingThing;
 }

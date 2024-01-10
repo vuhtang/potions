@@ -10,19 +10,19 @@ import lombok.Setter;
 @Getter
 @NoArgsConstructor
 @Entity
-@Table(name = "Enterprise_Point")
+@Table(name = "enterprise_point")
 public class EnterprisePoint {
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
-    private Long id;
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Integer id;
 
-    @Column(name = "Name", nullable = false)
+    @Column(name = "name", nullable = false)
     private String name;
 
-    @Column(name = "Location", nullable = false)
+    @Column(name = "location", nullable = false)
     private String location;
 
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "Type", referencedColumnName = "id", nullable = false)
+    @JoinColumn(name = "type", referencedColumnName = "id", nullable = false)
     private EnterprisePointType type;
 }

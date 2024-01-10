@@ -11,11 +11,11 @@ import java.sql.Date;
 @Setter
 @NoArgsConstructor
 @Entity
-@Table(name = "People")
+@Table(name = "people")
 public class Human {
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
-    private int id;
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Integer id;
 
     @Column(name = "name")
     private String name;

@@ -9,19 +9,19 @@ import lombok.Setter;
 @Getter
 @NoArgsConstructor
 @Entity
-@Table(name = "Effects")
+@Table(name = "effects")
 public class Effect {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
 
-    @Column(name = "Name")
+    @Column(name = "name")
     private String name;
 
-    @Column(name = "Power")
+    @Column(name = "power")
     private int power;
 
-    @Column(name = "Duration")
+    @Column(name = "duration")
     private int duration;
 }

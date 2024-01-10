@@ -1,4 +1,4 @@
-package org.example.server.entities;
+package org.example.server.model;
 
 import jakarta.persistence.*;
 import lombok.Getter;

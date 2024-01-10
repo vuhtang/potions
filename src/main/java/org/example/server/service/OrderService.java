@@ -1,7 +1,7 @@
 package org.example.server.service;
 
-import org.example.server.entities.Order;
-import org.example.server.entities.OrderStatus;
+import org.example.server.model.Order;
+import org.example.server.model.OrderStatus;
 
 import java.util.List;
 

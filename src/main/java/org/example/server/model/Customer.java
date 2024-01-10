@@ -1,4 +1,4 @@
-package org.example.server.entities;
+package org.example.server.model;
 
 
 import jakarta.persistence.*;
@@ -16,6 +16,6 @@ public class Customer {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
 
-    @Column(name = "Human_id", unique = true, nullable = false)
+    @Column(name = "human_id", unique = true, nullable = false)
     private int human_id;
 }

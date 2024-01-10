@@ -1,24 +1,24 @@
 package org.example.server.controller;
 
-import org.springframework.ui.Model;
-import org.example.server.entities.Order;
+import lombok.RequiredArgsConstructor;
+import org.example.server.model.Customer;
+import org.example.server.service.CustomerService;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
 
+@RequiredArgsConstructor
 @Controller
 public class TestController {
 
-    @GetMapping("user/start")
-    String getStartPage() {
-        return "user/start";
-    }
+    private final CustomerService customerService;
 
-    @GetMapping("user/checkStatusPage")
-    String getCheckStatusPage() {
-        return "user/checkStatusPage";
+    @GetMapping("user/start")
+    String getTestString(Model model) {
+        Long id = Long.parseLong("34");
+        Customer customer = customerService.getCustomerById(id);
+        model.addAttribute("customer", customer);
+        return "user/start";
     }
 
 }

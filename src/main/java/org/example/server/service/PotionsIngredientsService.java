@@ -1,7 +1,7 @@
 package org.example.server.service;
 
-import org.example.server.entities.EnterprisePoint;
-import org.example.server.entities.Order;
+import org.example.server.model.EnterprisePoint;
+import org.example.server.model.Order;
 
 public interface PotionsIngredientsService {
 

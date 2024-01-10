@@ -1,7 +1,7 @@
 package org.example.server.controller;
 
 import lombok.RequiredArgsConstructor;
-import org.example.server.model.Customer;
+import org.example.server.model.entities.Customer;
 import org.example.server.service.CustomerService;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;

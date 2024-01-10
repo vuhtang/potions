@@ -1,5 +1,4 @@
-package org.example.server.model;
-
+package org.example.server.model.entities;
 
 import jakarta.persistence.*;
 import lombok.Getter;
@@ -10,15 +9,13 @@ import lombok.Setter;
 @Getter
 @NoArgsConstructor
 @Entity
-@Table(name = "Potions")
-public class Potion {
+@Table(name = "living_things")
+public class LivingThing {
+
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
-    private Long id;
+    private int id;
 
-    @Column(name = "Name", nullable = false)
+    @Column(name = "name")
     private String name;
-
-    @Column(name = "Effect_id", nullable = false)
-    private int effect_id;
 }

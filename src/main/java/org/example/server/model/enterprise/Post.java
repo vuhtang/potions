@@ -1,18 +1,17 @@
-package org.example.server.model;
+package org.example.server.model.enterprise;
 
 import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
-import java.sql.Date;
-
-@Getter
 @Setter
+@Getter
 @NoArgsConstructor
 @Entity
-@Table(name = "people")
-public class Human {
+@Table(name = "posts")
+public class Post {
+
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private int id;
@@ -20,10 +19,7 @@ public class Human {
     @Column(name = "name")
     private String name;
 
-    @Column(name = "surname")
-    private String surname;
-
-    @Column(name = "date_of_birth")
-    private Date dateOfBirth;
-
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "ept_id", referencedColumnName = "id", nullable = false)
+    private EnterprisePointType enterprisePointType;
 }

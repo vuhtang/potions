@@ -1,9 +1,7 @@
 package org.example.server.service;
 
-import org.example.server.model.Order;
-import org.example.server.model.OrderStatus;
-
-import java.util.List;
+import org.example.server.model.logistics.Order;
+import org.example.server.model.logistics.OrderStatus;
 
 public interface OrderService {
     boolean checkOrderStatus(int orderId, OrderStatus status);

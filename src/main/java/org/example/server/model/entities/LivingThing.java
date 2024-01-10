@@ -1,5 +1,4 @@
-package org.example.server.model;
-
+package org.example.server.model.entities;
 
 import jakarta.persistence.*;
 import lombok.Getter;
@@ -10,13 +9,13 @@ import lombok.Setter;
 @Getter
 @NoArgsConstructor
 @Entity
-@Table(name = "enterprise_point_type")
-public class EnterprisePointType {
+@Table(name = "living_things")
+public class LivingThing {
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private int id;
 
-    @Column(name = "type", nullable = false)
-    private String type;
+    @Column(name = "name")
+    private String name;
 }

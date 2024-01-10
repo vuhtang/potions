@@ -1,4 +1,4 @@
-package org.example.server.model;
+package org.example.server.model.enterprise;
 
 
 import jakarta.persistence.*;

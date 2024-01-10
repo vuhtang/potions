@@ -1,5 +1,4 @@
-package org.example.server.model;
-
+package org.example.server.model.enterprise;
 
 import jakarta.persistence.*;
 import lombok.Getter;
@@ -10,16 +9,17 @@ import lombok.Setter;
 @Getter
 @NoArgsConstructor
 @Entity
-@Table(name = "Potions")
-public class Potion {
+@Table(name = "posts")
+public class Post {
+
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
-    private Long id;
+    private int id;
 
-    @Column(name = "Name", nullable = false)
+    @Column(name = "name")
     private String name;
 
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "effect_id", referencedColumnName = "id", nullable = false)
-    private Effect effect;
+    @JoinColumn(name = "ept_id", referencedColumnName = "id", nullable = false)
+    private EnterprisePointType enterprisePointType;
 }

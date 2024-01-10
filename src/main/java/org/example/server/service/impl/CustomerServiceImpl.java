@@ -1,7 +1,7 @@
 package org.example.server.service.impl;
 
 import lombok.RequiredArgsConstructor;
-import org.example.server.model.Customer;
+import org.example.server.model.entities.Customer;
 import org.example.server.repository.CustomerRepository;
 import org.example.server.service.CustomerService;
 import org.springframework.context.annotation.Primary;

@@ -6,6 +6,7 @@
     <link th:href="@{/styles/user/general.css}" rel="stylesheet"/>
     <link th:href="@{/styles/user/start.css}" rel="stylesheet"/>
     <link th:href="@{/styles/user/statusPage.css}" rel="stylesheet"/>
+    <link th:href="@{/styles/user/inputSpace.css}" rel="stylesheet"/>
 </head>
 <body>
 
@@ -14,8 +15,8 @@
 <div class="text-field text-field_floating-3">
 <!--    todo дописать форму для отправки на контроллер-->
     <form>
-        <input class="text-field__input" type="orderNumber" id="orderNumber" name="orderNumber" placeholder="alexander@itchief.ru">
-        <label class="text-field__label" for="orderNumber">Номер заказа</label>
+        <input class="text-field__input" type="name" id="name" name="name">
+        <label class="text-field__label" for="name">Номер заказа</label>
         <h2 th:text="${status}"/>
         <a href="#" class="buttons" id="getStatusButton">Проверить статус заказа</a>
     </form>

@@ -1,10 +1,70 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
     <title>Title</title>
+    <link th:href="@{/styles/user/general.css}" rel="stylesheet"/>
+    <link th:href="@{/styles/user/inputSpace.css}" rel="stylesheet"/>
 </head>
 <body>
 
+
+<div class="text-field text-field_floating-3">
+    <!--    todo дописать форму для отправки на контроллер-->
+    <form>
+        <input class="text-field__input" type="userName" id="userName" name="userName">
+        <label class="text-field__label" for="userName">Номер заказа</label>
+    </form>
+</div>
+<h2>Выбранные зелья</h2>
+<div class="selected-items tbl-header">
+    <table>
+        <thead>
+        <tr>
+            <th>Название товара</th>
+            <th>Количество</th>
+            <th></th>
+        </tr>
+        </thead>
+    </table>
+</div>
+<div class="selected-items tbl-content">
+    <table>
+        <tbody>
+        <tr th:each="item : ${cart.items}">
+            <td th:text="${item.potion.name}"></td>
+            <td>
+                <button onclick="decrement('${item}')">-</button>
+                <span th:text="${item.count}"></span>
+                <button onclick="increment('${item}')">+</button>
+            </td>
+            <td>
+                <form th:action="removeItem('${item}')" method="post">
+                    <input type="hidden" name="potionId" th:value="${item}"/>
+                    <button type="submit">Удалить</button>
+                </form>
+            </td>
+        </tr>
+        </tbody>
+    </table>
+</div>
+
+<div class="all-items">
+    <h2>Список доступных зелий</h2>
+    <div class="item-list">
+        <ul>
+            <li th:each="item : ${cart.items}">
+                <span th:text="${item.name}"></span>
+                <button onclick="addItem('${item}')">Добавить</button>
+            </li>
+        </ul>
+    </div>
+</div>
+
+<a href="#" class="buttons" id="createOrder">Оформить заказ</a>
+<a href="#" class="buttons" id="redirectBackButton">Назад</a>
+
+<script th:src="@{/js/user/cartList.js}"></script>
+<script th:src="@{/js/user/orderForm.js}"></script>
 </body>
 </html>

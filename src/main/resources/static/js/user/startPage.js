@@ -1,5 +1,5 @@
 document.getElementById("redirectStatusButton").addEventListener("click", function() {
-    window.location.href = "https://example.com";
+    window.location.href = "http://localhost:8080/user/checkStatusPage";
 });
 
 document.getElementById("redirectOrderButton").addEventListener("click", function() {

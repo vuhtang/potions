@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <link th:href="@{/styles/user/general.css}" rel="stylesheet"/>
+    <link th:href="@{/styles/user/start.css}" rel="stylesheet"/>
+    <link th:href="@{/styles/user/statusPage.css}" rel="stylesheet"/>
+</head>
+<body>
+
+<p>Введите номер вашего заказа:</p>
+
+<div class="text-field text-field_floating-3">
+<!--    todo дописать форму для отправки на контроллер-->
+    <form>
+        <input class="text-field__input" type="orderNumber" id="orderNumber" name="orderNumber" placeholder="alexander@itchief.ru">
+        <label class="text-field__label" for="orderNumber">Номер заказа</label>
+        <h2 th:text="${status}"/>
+        <a href="#" class="buttons" id="getStatusButton">Проверить статус заказа</a>
+    </form>
+</div>
+<a href="#" class="buttons" id="redirectBackButton">Назад</a>
+
+<script th:src="@{/js/user/checkStatusPage.js}"></script>
+
+</body>
+</html>

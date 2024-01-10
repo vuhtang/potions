@@ -23,6 +23,6 @@ public class EnterprisePoint {
     private String location;
 
     @ManyToOne(fetch = FetchType.LAZY)
-    @Column(name = "type", nullable = false)
-    private int type;
+    @JoinColumn(name = "type", referencedColumnName = "id", nullable = false)
+    private EnterprisePointType type;
 }

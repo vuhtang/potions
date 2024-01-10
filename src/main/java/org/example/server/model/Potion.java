@@ -19,6 +19,7 @@ public class Potion {
     @Column(name = "Name", nullable = false)
     private String name;
 
-    @Column(name = "Effect_id", nullable = false)
-    private int effect_id;
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "effect_id", referencedColumnName = "id", nullable = false)
+    private Effect effect;
 }

@@ -17,6 +17,6 @@ public class Customer {
     private Long id;
 
     @OneToOne(cascade = CascadeType.ALL)
-    @JoinColumn(name = "human_id", referencedColumnName = "id", nullable = false)
+    @JoinColumn(name = "Human_id", referencedColumnName = "id", nullable = false)
     private Human human;
 }

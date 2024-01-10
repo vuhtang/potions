@@ -10,13 +10,13 @@ import lombok.Setter;
 @Getter
 @NoArgsConstructor
 @Entity
-@Table(name = "enterprise_point_type")
+@Table(name = "Enterprise_Point_Type")
 public class EnterprisePointType {
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private int id;
 
-    @Column(name = "type", nullable = false)
+    @Column(name = "Type", nullable = false)
     private String type;
 }

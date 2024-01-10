@@ -16,12 +16,12 @@ public class Effect {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private int id;
 
-    @Column(name = "name")
+    @Column(name = "Name")
     private String name;
 
-    @Column(name = "power")
+    @Column(name = "Power")
     private int power;
 
-    @Column(name = "duration")
+    @Column(name = "Duration")
     private int duration;
 }

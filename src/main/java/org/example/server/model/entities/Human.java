@@ -11,7 +11,7 @@ import java.sql.Date;
 @Setter
 @NoArgsConstructor
 @Entity
-@Table(name = "people")
+@Table(name = "People")
 public class Human {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)

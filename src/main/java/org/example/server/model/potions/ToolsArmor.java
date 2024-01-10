@@ -9,7 +9,7 @@ import lombok.Setter;
 @Getter
 @NoArgsConstructor
 @Entity
-@Table(name = "tools_armor")
+@Table(name = "Tools_Armor")
 public class ToolsArmor {
 
     @Id

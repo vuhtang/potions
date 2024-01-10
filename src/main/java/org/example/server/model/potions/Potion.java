@@ -20,6 +20,6 @@ public class Potion {
     private String name;
 
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "effect_id", referencedColumnName = "id", nullable = false)
+    @JoinColumn(name = "Effect_id", referencedColumnName = "id", nullable = false)
     private Effect effect;
 }

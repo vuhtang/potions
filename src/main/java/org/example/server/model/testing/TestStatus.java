@@ -9,12 +9,12 @@ import lombok.Setter;
 @Getter
 @NoArgsConstructor
 @Entity
-@Table(name = "test_status")
+@Table(name = "Test_Status")
 public class TestStatus {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private int id;
 
-    @Column(name = "status")
+    @Column(name = "Status")
     private String status;
 }

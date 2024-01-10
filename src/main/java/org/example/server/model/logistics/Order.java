@@ -18,16 +18,16 @@ public class Order {
     private Long id;
 
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "customer_id", referencedColumnName = "id", nullable = false)
+    @JoinColumn(name = "Customer_id", referencedColumnName = "id", nullable = false)
     private Customer customer_id;
 
-    @Column(name = "creation_time")
+    @Column(name = "Creation_time")
     private String creation_time;
 
-    @Column(name = "completion_time")
+    @Column(name = "Completion_time")
     private String completion_time;
 
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "order_status", referencedColumnName = "id", nullable = false)
+    @JoinColumn(name = "Order_status", referencedColumnName = "id", nullable = false)
     private OrderStatus status;
 }

@@ -9,17 +9,17 @@ import lombok.Setter;
 @Getter
 @NoArgsConstructor
 @Entity
-@Table(name = "posts")
+@Table(name = "Posts")
 public class Post {
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private int id;
 
-    @Column(name = "name")
+    @Column(name = "Name")
     private String name;
 
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "ept_id", referencedColumnName = "id", nullable = false)
+    @JoinColumn(name = "EPT_id", referencedColumnName = "id", nullable = false)
     private EnterprisePointType enterprisePointType;
 }

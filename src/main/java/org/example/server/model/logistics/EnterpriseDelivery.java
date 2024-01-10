@@ -13,7 +13,7 @@ import java.sql.Timestamp;
 @Getter
 @NoArgsConstructor
 @Entity
-@Table(name = "enterprise_deliveries")
+@Table(name = "Enterprise_Deliveries")
 public class EnterpriseDelivery {
 
     @Id
@@ -21,20 +21,20 @@ public class EnterpriseDelivery {
     private int id;
 
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "ep_from_id", referencedColumnName = "id", nullable = false)
+    @JoinColumn(name = "EP_from_id", referencedColumnName = "id", nullable = false)
     private EnterprisePoint enterprisePointFrom;
 
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "ep_to_id", referencedColumnName = "id", nullable = false)
+    @JoinColumn(name = "EP_to_id", referencedColumnName = "id", nullable = false)
     private EnterprisePoint enterprisePointTo;
 
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "courier_id", referencedColumnName = "id", nullable = false)
+    @JoinColumn(name = "Courier_id", referencedColumnName = "id", nullable = false)
     private Worker courier;
 
-    @Column(name = "creation_time")
+    @Column(name = "Creation_time")
     private Timestamp creationTime;
 
-    @Column(name = "completion_time")
+    @Column(name = "Completion_time")
     private Timestamp completionTime;
 }

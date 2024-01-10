@@ -14,7 +14,7 @@ import java.sql.Date;
 @Getter
 @NoArgsConstructor
 @Entity
-@Table(name = "tests")
+@Table(name = "Tests")
 public class Test {
 
     @Id
@@ -22,24 +22,24 @@ public class Test {
     private int id;
 
     @ManyToOne
-    @JoinColumn(name = "potion_id", referencedColumnName = "id", nullable = false)
+    @JoinColumn(name = "Potion_id", referencedColumnName = "id", nullable = false)
     private Potion potion;
 
-    @Column(name = "test_date")
+    @Column(name = "Test_date")
     private Date testDate;
 
     @ManyToOne
-    @JoinColumn(name = "test_status", referencedColumnName = "id", nullable = false)
+    @JoinColumn(name = "Test_status", referencedColumnName = "id", nullable = false)
     private TestStatus testStatus;
 
     @ManyToOne
-    @JoinColumn(name = "worker_id", referencedColumnName = "id", nullable = false)
+    @JoinColumn(name = "Worker_id", referencedColumnName = "id", nullable = false)
     private Worker worker;
 
     @ManyToOne
-    @JoinColumn(name = "living_thing_id", referencedColumnName = "id")
+    @JoinColumn(name = "Living_Thing_id", referencedColumnName = "id")
     private LivingThing livingThing;
 
-    @Column(name = "duration")
+    @Column(name = "Duration")
     private int duration;
 }

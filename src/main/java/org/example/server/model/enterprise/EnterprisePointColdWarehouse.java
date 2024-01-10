@@ -10,7 +10,7 @@ import org.example.server.model.potions.Potion;
 @Getter
 @NoArgsConstructor
 @Entity
-@Table(name = "enterprise_point_coldwarehouse")
+@Table(name = "Enterprise_Point_Coldwarehouse")
 public class EnterprisePointColdWarehouse {
 
     @Id
@@ -18,13 +18,13 @@ public class EnterprisePointColdWarehouse {
     private int id;
 
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "ep_id", referencedColumnName = "id", nullable = false)
+    @JoinColumn(name = "EP_id", referencedColumnName = "id", nullable = false)
     private EnterprisePoint enterprisePoint;
 
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "potion_id", referencedColumnName = "id", nullable = false)
+    @JoinColumn(name = "Potion_id", referencedColumnName = "id", nullable = false)
     private Potion potion;
 
-    @Column(name = "amount_of_ingredient")
+    @Column(name = "Amount_of_Ingredient")
     private int amountOfPotions;
 }

@@ -12,4 +12,8 @@ public interface OrderService {
 
     Integer createOrder(Integer userId, List<CartItem> cartItems);
     Order getOrderById(int orderId);
+
+    List<Order> getAllOrders();
+
+    List<Order> getAllActiveOrders();
 }

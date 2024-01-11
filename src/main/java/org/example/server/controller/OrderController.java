@@ -29,7 +29,7 @@ public class OrderController {
 
     @PostMapping("/createOrder")
     String createOrderForm(@ModelAttribute Integer userId, Model model) {
-        Integer orderId =  orderService.createOrder(userId, cart.getItems());
+        Integer orderId = orderService.createOrder(userId, cart.getItems());
         model.addAttribute("orderId", orderId);
         return "user/orderCreateComplete";
     }

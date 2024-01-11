@@ -47,7 +47,7 @@ public class OrderController {
     String getCreateFormPage(Model model) {
         Cart cart = new Cart();
         //todo достать список всех зелей
-        List<Potion> allPotions = potionsController
+//        List<Potion> allPotions = potionsController;
         int allPotions = 5; //просто заглушка должно быть: List<Potion> allPorions
         model.addAttribute("cart", cart);
         model.addAttribute("allPotions", allPotions);

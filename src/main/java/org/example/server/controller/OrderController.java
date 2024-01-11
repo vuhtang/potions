@@ -28,9 +28,10 @@ public class OrderController {
     private final PotionsIngredientsService potionsIngredientsService;
 
     @PostMapping("/createOrder")
-    public void createOrderForm(String userName, List<CartItem> cartInput, Model model) {
-
-        model.addAttribute("status", "Готов");
+    String createOrderForm(@ModelAttribute Integer userId, Model model) {
+        Integer orderId =  orderService.createOrder(userId, cart.getItems());
+        model.addAttribute("orderId", orderId);
+        return "user/orderCreateComplete";
     }
 
     @PostMapping("/checkStatus")
@@ -90,6 +91,7 @@ public class OrderController {
         return "user/orderFormPage";
     }
 
+
     @PostMapping("/addPotionToCart")
     public void addPotionToCart(@ModelAttribute CountChangerForm countChangerForm, Model model) {
         Cart cart = countChangerForm.getCart();
@@ -106,5 +108,6 @@ public class OrderController {
     private void decCount(@ModelAttribute CountChangerForm countChangerForm, Model model){
         countChangerForm.getCart().incCount(countChangerForm.getItem());
     }
+
 }
 

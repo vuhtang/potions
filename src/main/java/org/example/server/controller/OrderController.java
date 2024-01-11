@@ -11,15 +11,13 @@ import org.example.server.service.OrderService;
 import org.example.server.service.PotionsIngredientsService;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
 @RequiredArgsConstructor
 @Controller
+@SessionAttributes({"cart","allPotions"})
 @RequestMapping("/orders")
 public class OrderController {
 
@@ -28,7 +26,7 @@ public class OrderController {
     private final PotionsIngredientsService potionsIngredientsService;
 
     @PostMapping("/createOrder")
-    String createOrderForm(@ModelAttribute Integer userId, Model model) {
+    String createOrderForm(@ModelAttribute Integer userId, @ModelAttribute Cart cart, Model model) {
         Integer orderId = orderService.createOrder(userId, cart.getItems());
         model.addAttribute("orderId", orderId);
         return "user/orderCreateComplete";
@@ -71,42 +69,45 @@ public class OrderController {
 
     @GetMapping("/createFormPage")
     String getCreateFormPage(Model model) {
-        if (!model.containsAttribute("cart"))
-            model.addAttribute("cart", new Cart());
-        model.addAttribute("ccForm", new CountChangerForm());
+        Cart cart = new Cart();
+        model.addAttribute("cart", cart);
+        CountChangerForm countChangerForm = new CountChangerForm();
+        model.addAttribute("countChangerForm", countChangerForm);
         List<Potion> allPotions = potionsIngredientsService.getAllPotions();
         model.addAttribute("allPotions", allPotions);
         return "user/orderFormPage";
     }
 
     @PostMapping("/removeCartItem")
-    String removeCartItem(@ModelAttribute CartItem item, Model model) {
-        Cart cart = (Cart) model.getAttribute("cart");
-
-        cart.removeItem(item.getPotion().getId());
-
-        model.addAttribute("cart", cart);
-        List<Potion> allPotions = potionsIngredientsService.getAllPotions();
-        model.addAttribute("allPotions", allPotions);
+    String removeCartItem(@ModelAttribute CountChangerForm countChangerForm, @ModelAttribute Cart cart, Model model) {
+        cart.deleteItem(countChangerForm.getItem());
         return "user/orderFormPage";
     }
 
 
     @PostMapping("/addPotionToCart")
-    public void addPotionToCart(@ModelAttribute CountChangerForm countChangerForm, Model model) {
-        Cart cart = countChangerForm.getCart();
+    String addPotionToCart(@ModelAttribute CountChangerForm countChangerForm, @ModelAttribute Cart cart, Model model) {
         CartItem item = countChangerForm.getItem();
+        item.setCount(1);
         cart.addItem(item);
+        cart.addItem(item);
+        return "user/orderFormPage";
     }
 
     @PostMapping("/incCount")
-    private void incCount(@ModelAttribute CountChangerForm countChangerForm, Model model){
-        countChangerForm.getCart().incCount(countChangerForm.getItem());
+    String incCount(@ModelAttribute CountChangerForm countChangerForm, @ModelAttribute Cart cart, Model model){
+        cart.incCount(countChangerForm.getItem());
+        return "user/orderFormPage";
     }
 
     @PostMapping("/decCount")
-    private void decCount(@ModelAttribute CountChangerForm countChangerForm, Model model){
-        countChangerForm.getCart().incCount(countChangerForm.getItem());
+    String decCount(@ModelAttribute CountChangerForm countChangerForm, @ModelAttribute Cart cart, Model model){
+        CartItem item = countChangerForm.getItem();
+        cart.decCount(item);
+        if(cart.checkCountEqualNol(item)){
+            cart.deleteItem(item);
+        }
+        return "user/orderFormPage";
     }
 
 }

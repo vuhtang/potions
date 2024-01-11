@@ -18,8 +18,8 @@ import java.util.Optional;
 
 @Setter
 @Getter
-@Component
-@ApplicationScope
+//@Component
+//@ApplicationScope
 public class Cart {
 
     private final List<CartItem> items = new ArrayList<>();
@@ -33,6 +33,22 @@ public class Cart {
             }
         }
     }
+
+
+    public boolean checkCountEqualNol(CartItem item) {
+        if (item == null) return true;
+        for (CartItem existingItem : items) {
+            if (existingItem.getPotion().getId().equals(item.getPotion().getId())) {
+                if(existingItem.getCount() == 0){
+                    return true;
+                }else{
+                    return false;
+                }
+            }
+        }
+        return true;
+    }
+
 
     public void incCount(CartItem item) {
         if (item == null) return;
@@ -75,9 +91,9 @@ public class Cart {
             items.add(item);
     }
 
-    public void removeItem(Integer productId) {
-        if (productId == null) return;
-        // Удаляем товар из корзины по его ID
-        items.removeIf(item -> item.getPotion().getId().equals(productId));
-    }
+//    public void removeItem(Integer productId) {
+//        if (productId == null) return;
+//        // Удаляем товар из корзины по его ID
+//        items.removeIf(item -> item.getPotion().getId().equals(productId));
+//    }
 }

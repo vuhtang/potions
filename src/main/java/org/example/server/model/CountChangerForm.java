@@ -9,7 +9,7 @@ import lombok.Setter;
 @Setter
 @NoArgsConstructor
 public class CountChangerForm {
-    private Cart cart;
+    private Cart cartCC;
     private CartItem item;
 
 }

@@ -34,20 +34,37 @@
 <div class="selected-items tbl-content">
     <table>
         <tbody>
-        <tr th:each="item : ${cart.getItems()}">
-            <td th:text="${item.potion.name}"></td>
+        <tr th:each="itemE : ${cart.getItems()}">
+            <td th:text="${itemE.potion.name}"></td>
             <td>
-                <form action="#" th:method="post" th:action="@{/orders/decCount}" th:object="${ccForm}">
-                    <input>
+                <form action="#" th:method="post" th:action="@{/orders/decCount}" th:object="${countChangerForm}">
+                    <input hidden="hidden" th:value="${itemE.potion.id}" name="item.potion.id"/>
+                    <input hidden="hidden" th:value="${itemE.potion.name}" name="item.potion.name"/>
+                    <input hidden="hidden" th:value="${itemE.potion.effect.id}" name="item.potion.effect.id"/>
+                    <input hidden="hidden" th:value="${itemE.potion.effect.name}" name="item.potion.effect.name"/>
+                    <input hidden="hidden" th:value="${itemE.potion.effect.power}" name="item.potion.effect.power"/>
+                    <input hidden="hidden" th:value="${itemE.potion.effect.duration}" name="item.potion.effect.duration"/>
                     <button type="submit">-</button>
                 </form>
-                <span th:text="${item.count}"></span>
-                <form action="#" th:method="post" th:action="@{/orders/incCount}" th:object="${ccForm}">
+                <span th:text="${itemE.count}"></span>
+                <form action="#" th:method="post" th:action="@{/orders/incCount}" th:object="${countChangerForm}">
+                    <input hidden="hidden" th:value="${itemE.potion.id}" name="item.potion.id"/>
+                    <input hidden="hidden" th:value="${itemE.potion.name}" name="item.potion.name"/>
+                    <input hidden="hidden" th:value="${itemE.potion.effect.id}" name="item.potion.effect.id"/>
+                    <input hidden="hidden" th:value="${itemE.potion.effect.name}" name="item.potion.effect.name"/>
+                    <input hidden="hidden" th:value="${itemE.potion.effect.power}" name="item.potion.effect.power"/>
+                    <input hidden="hidden" th:value="${itemE.potion.effect.duration}" name="item.potion.effect.duration"/>
                     <button type="submit">+</button>
                 </form>
             </td>
             <td>
-                <form action="#" th:method="post" th:action="@{/orders/removeCartItem}" th:object="${item}">
+                <form action="#" th:method="post" th:action="@{/orders/removeCartItem}" th:object="${countChangerForm}">
+                    <input hidden="hidden" th:value="${itemE.potion.id}" name="item.potion.id"/>
+                    <input hidden="hidden" th:value="${itemE.potion.name}" name="item.potion.name"/>
+                    <input hidden="hidden" th:value="${itemE.potion.effect.id}" name="item.potion.effect.id"/>
+                    <input hidden="hidden" th:value="${itemE.potion.effect.name}" name="item.potion.effect.name"/>
+                    <input hidden="hidden" th:value="${itemE.potion.effect.power}" name="item.potion.effect.power"/>
+                    <input hidden="hidden" th:value="${itemE.potion.effect.duration}" name="item.potion.effect.duration"/>
                     <button type="submit">Удалить</button>
                 </form>
             </td>
@@ -60,12 +77,15 @@
     <a href="#" class="buttons" id="potionsList">Список доступных зелий</a>
     <div class="item-list">
         <ul id="dropdownList">
-            <li th:each="potion : ${allPotions}">
-                <form th:method="post" th:action="@{/orders/addPotionToCart}" th:object="${ccForm}">
-                    <input type="hidden" th:field="*{cart}" th:value="${cart}" />
-                    <input type="hidden" th:field="*{item.potion}" th:value="${potion.name}" />
-                    <input type="hidden" th:field="*{item.count}" th:value="${1}" />
-                    <span th:text="${potion.name}"></span>
+            <li th:each="potionE : ${allPotions}">
+                <form th:method="post" th:action="@{/orders/addPotionToCart}" th:object="${countChangerForm}">
+                    <input hidden="hidden" th:value="${potionE.id}" name="item.potion.id"/>
+                    <input hidden="hidden" th:value="${potionE.name}" name="item.potion.name"/>
+                    <input hidden="hidden" th:value="${potionE.effect.id}" name="item.potion.effect.id"/>
+                    <input hidden="hidden" th:value="${potionE.effect.name}" name="item.potion.effect.name"/>
+                    <input hidden="hidden" th:value="${potionE.effect.power}" name="item.potion.effect.power"/>
+                    <input hidden="hidden" th:value="${potionE.effect.duration}" name="item.potion.effect.duration"/>
+                    <span th:text="${potionE.name}"></span>
                     <button type="submit">Добавить</button>
                 </form>
             </li>

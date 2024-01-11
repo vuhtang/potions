@@ -44,13 +44,17 @@ public class OrderServiceImpl implements OrderService {
 
     @Override
     public Integer createOrder(Integer userId, List<CartItem> cartItems) {
-        List<Potion> potions = new ArrayList<>();
+        List<Integer> potionIds = new ArrayList<>();
         List<Integer> amounts = new ArrayList<>();
         for (CartItem item: cartItems) {
-            potions.add(item.getPotion());
+            potionIds.add(item.getPotion().getId());
             amounts.add(item.getCount());
         }
-        return orderRepository.createOrder(userId, potions, amounts);
+        Integer[] potionsIdsArray = new Integer[potionIds.size()];
+        potionIds.toArray(potionsIdsArray);
+        Integer[] amountsArray = new Integer[amounts.size()];
+        amounts.toArray(amountsArray);
+        return orderRepository.createOrder(userId, potionsIdsArray, amountsArray);
     }
 
     @Override

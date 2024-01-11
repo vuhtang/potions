@@ -97,7 +97,9 @@ public class ManagerController {
     }
 
     @GetMapping("/warehouse")
-    String getWarehousePage(Model model) {
+    String getWarehousePage(@ModelAttribute EnterprisePoint ep , Model model) {
+
+        model.addAttribute("EP", ep);
         return "manager/warehouse";
     }
 

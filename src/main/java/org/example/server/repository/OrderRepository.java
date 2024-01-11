@@ -12,7 +12,7 @@ import java.util.List;
 @Repository
 public interface OrderRepository extends JpaRepository<Order, Integer> {
     @Procedure(procedureName = "createOrder")
-    Integer createOrder(Integer customerId, List<Potion> potions, List<Integer> amounts);
+    Integer createOrder(Integer customerId, Integer[] potionIds, Integer[] amounts);
 
     @Query(value = "select * from orders where order_status != 3", nativeQuery = true)
     List<Order> findAllActiveOrders();

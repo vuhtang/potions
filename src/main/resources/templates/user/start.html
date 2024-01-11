@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <title>Title</title>
-    <link th:href="@{/styles/user/general.css}" rel="stylesheet" />
+    <link th:href="@{/styles/general/general.css}" rel="stylesheet" />
     <link th:href="@{/styles/user/start.css}" rel="stylesheet" />
 </head>
 <body>
@@ -16,12 +16,12 @@
 <div class="links-container">
     <img th:src="@{/images/qwer1.png}" width="350" height="350"  alt="yellow_potion"/>
 
-    <a href="#" class="buttons" id="redirectStatusButton">Проверить статус заказа</a>
-    <a href="#" class="buttons" id="redirectOrderButton">Оформить заказ</a>
+    <button type="button" class="buttons" onclick="goTo('orders/checkStatusPage')" id="redirectStatusButton">Проверить статус заказа</button>
+    <button type="button" class="buttons" onclick="goTo('orders/createFormPage')" id="redirectOrderButton">Оформить заказ</button>
 
     <img th:src="@{/images/qwer2.png}" width="350" height="350"  alt="red_potion"/>
 </div>
 
-<script th:src="@{/js/user/startPage.js}"></script>
+<script th:src="@{/js/general/goto.js}"></script>
 </body>
 </html>

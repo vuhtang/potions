@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <title>Title</title>
-    <link th:href="@{/styles/user/general.css}" rel="stylesheet" />
+    <link th:href="@{/styles/general/general.css}" rel="stylesheet" />
 
 </head>
 <body>
@@ -14,8 +14,8 @@
     <p>По этому номеру вы можете проверять свой заказ:...</p>
 </div>
 
-<a href="#" class="buttons" id="toStartPage">Оформить заказ</a>
+<button type="button" class="buttons" onclick="goTo('user/start')" id="toStartPage">На главную страницу</button>
 
-<script th:src="@{/js/user/orderCreateCompletePage.js}"></script>
+<script th:src="@{/js/general/goto.js}"></script>
 </body>
 </html>

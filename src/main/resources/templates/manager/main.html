@@ -3,16 +3,21 @@
 <head>
     <meta charset="UTF-8">
     <title>Title</title>
-    <link th:href="@{/styles/user/general.css}" rel="stylesheet"/>
-    <link th:href="@{/styles/user/start.css}" rel="stylesheet"/>
-    <link th:href="@{/styles/user/statusPage.css}" rel="stylesheet"/>
-    <link th:href="@{/styles/user/inputSpace.css}" rel="stylesheet"/>
+    <link th:href="@{/styles/general/general.css}" rel="stylesheet"/>
+    <link th:href="@{/styles/general/inputSpace.css}" rel="stylesheet"/>
+    <link th:href="@{/styles/manager/main.css}" rel="stylesheet"/>
 </head>
 <body>
 <div class="welcome-block">
     <h1>Здравствуйте <span th:text="${EP.getName()}"/></h1>
 
+    <button onclick="goTo()">Список активных заказов</button>
+    <button onclick="goTo()">История заказов</button>
+    <button onclick="goTo()">Производство зелей</button>
+    <button onclick="goTo()">Заказ ингредиентов</button>
+    <button onclick="goTo()">Склад</button>
 
+    <script th:src="@{/js/general/goto.js}"></script>
 </div>
 </body>
 </html>

@@ -3,10 +3,9 @@
 <head>
     <meta charset="UTF-8">
     <title>Title</title>
-    <link th:href="@{/styles/user/general.css}" rel="stylesheet"/>
-    <link th:href="@{/styles/user/start.css}" rel="stylesheet"/>
+    <link th:href="@{/styles/general/general.css}" rel="stylesheet"/>
     <link th:href="@{/styles/user/statusPage.css}" rel="stylesheet"/>
-    <link th:href="@{/styles/user/inputSpace.css}" rel="stylesheet"/>
+    <link th:href="@{/styles/general/inputSpace.css}" rel="stylesheet"/>
 </head>
 <body>
 
@@ -21,10 +20,9 @@
 <!--        <a href="#" class="buttons" id="getStatusButton">Проверить статус заказа</a>-->
     </form>
 </div>
-<a href="#" class="buttons" id="redirectBackButton">На главную</a>
+<button type="button" class="buttons" onclick="goTo('user/start')" id="redirectBackButton">На главную</button>
 
-<script th:src="@{/js/user/checkStatusPage.js}"></script>
-<script th:src="@{/js/user/goto.js}"></script>
+<script th:src="@{/js/general/goto.js}"></script>
 
 </body>
 </html>

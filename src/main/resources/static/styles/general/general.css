@@ -9,7 +9,7 @@ body {
     margin: 0;
 }
 
-a.buttons {
+button {
     padding: 3px 14px;
     -webkit-box-shadow: rgba(0, 0, 0, 0.701961) 0px 5px 12px;
     -webkit-transform-origin: 50% 1px;
@@ -35,15 +35,32 @@ a.buttons {
     text-decoration:none;
     justify-content: center;
 }
-a.buttons:hover {
+
+button:hover {
     cursor: pointer;
     opacity: 0.9;
     border-width: 1px 7px 1px 1px;
 }
-a.buttons:active {
+button:active {
     -webkit-box-shadow:inset rgba(0, 0, 0, 0.701961) 0px 7px 12px,rgba(0, 0, 0, 0.701961) 0px 2px 12px  ;
     text-shadow: rgb(0, 0, 0) 0px -2px 1px;
     margin-top: 1px;
 }
 
+.welcome-block {
+    text-align: center;
+}
 
+h1 {
+    font-size: 3em;
+    margin-bottom: 10px;
+    font-weight: bold;
+    /*text-shadow: 2px 2px 2px #888;*/
+    color: #eeab28;
+}
+
+p {
+    font-size: 1.5em;
+    color: #777;
+    text-shadow: 1px 1px 1px #ccc;
+}

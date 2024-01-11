@@ -9,13 +9,13 @@
 </head>
 <body>
 <div class="welcome-block">
-    <h1>Здравствуйте <span th:text="${EP.getName()}"/></h1>
+    <h1><span th:text="${EP.getName()}"/></h1>
 
-    <button onclick="goTo()">Список активных заказов</button>
-    <button onclick="goTo()">История заказов</button>
-    <button onclick="goTo()">Производство зелей</button>
-    <button onclick="goTo()">Заказ ингредиентов</button>
-    <button onclick="goTo()">Склад</button>
+    <button onclick="goTo('manager/orderList')">Список активных заказов</button>
+    <button onclick="goTo('manager/historyOrder')">История заказов</button>
+    <button onclick="goTo('manager/factoryPotion')">Производство зелей</button>
+    <button onclick="goTo('manager/orderIngredient')">Заказ ингредиентов</button>
+    <button onclick="goTo('manager/warehouse')">Склад</button>
 
     <script th:src="@{/js/general/goto.js}"></script>
 </div>

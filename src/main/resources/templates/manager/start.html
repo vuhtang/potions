@@ -13,7 +13,6 @@
 </div>
 
 <div class="text-field text-field_floating-3">
-<!--    todo нужен бэк-->
     <form id="checkStatus" th:method="post" th:action="@{/manager/setEP}" th:object="${idEPform}">
         <input class="text-field__input" type="number" id="epNumber"  th:field="*{idEP}">
         <label class="text-field__label" for="epNumber">Номер пункта</label>

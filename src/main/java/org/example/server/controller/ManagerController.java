@@ -21,7 +21,7 @@ import java.util.stream.IntStream;
 
 @RequiredArgsConstructor
 @Controller
-@SessionAttributes("EP")
+@SessionAttributes("ep")
 @RequestMapping("/manager")
 public class ManagerController {
 
@@ -31,7 +31,7 @@ public class ManagerController {
     @PostMapping("/setEP")
     String setEPService(@ModelAttribute EPIdForm idEPform, Model model) {
         EnterprisePoint ep = epService.getEnterprisePointById(idEPform.getIdEP());
-        model.addAttribute("EP", ep);
+        model.addAttribute("ep", ep);
         return ("manager/main");
     }
 

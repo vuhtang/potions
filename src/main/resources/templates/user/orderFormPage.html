@@ -37,12 +37,13 @@
         <tr th:each="item : ${cart.getItems()}">
             <td th:text="${item.potion.name}"></td>
             <td>
-                <form action="#" th:method="post" th:action="@{/orders/addItemToCart}" th:object="${item}">
-                    <label>
-                        jopa
-<!--                        <input type="text" th:field="*{count}">-->
-                    </label>
-                    <button type="submit">Применить</button>
+                <form action="#" th:method="post" th:action="@{/orders/decCount}" th:object="${ccForm}">
+                    <input>
+                    <button type="submit">-</button>
+                </form>
+                <span th:text="${item.count}"></span>
+                <form action="#" th:method="post" th:action="@{/orders/incCount}" th:object="${ccForm}">
+                    <button type="submit">+</button>
                 </form>
             </td>
             <td>
@@ -60,7 +61,10 @@
     <div class="item-list">
         <ul id="dropdownList">
             <li th:each="potion : ${allPotions}">
-                <form th:method="post" th:action="@{/orders/addPotionToCart}" th:object="${potion}">
+                <form th:method="post" th:action="@{/orders/addPotionToCart}" th:object="${ccForm}">
+                    <input type="hidden" th:field="*{cart}" th:value="${cart}" />
+                    <input type="hidden" th:field="*{item.potion}" th:value="${potion.name}" />
+                    <input type="hidden" th:field="*{item.count}" th:value="${1}" />
                     <span th:text="${potion.name}"></span>
                     <button type="submit">Добавить</button>
                 </form>

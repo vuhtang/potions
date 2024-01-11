@@ -58,14 +58,14 @@ public class Cart {
         }
     }
 
-    public void addItem(Potion potion) {
-        if (potion == null) return;
-
-        Optional<CartItem> o = items.stream().filter(cartItem -> cartItem.getPotion().getId().equals(potion.getId())).findFirst();
-        o.ifPresent(items::remove);
-
-        items.add(new CartItem(potion, 0));
-    }
+//    public void addItem(Potion potion) {
+//        if (potion == null) return;
+//
+//        Optional<CartItem> o = items.stream().filter(cartItem -> cartItem.getPotion().getId().equals(potion.getId())).findFirst();
+//        o.ifPresent(items::remove);
+//
+//        items.add(new CartItem(potion, 0));
+//    }
     public void addItem(CartItem item) {
         if (item == null) return;
         for (CartItem existingItem : items) {

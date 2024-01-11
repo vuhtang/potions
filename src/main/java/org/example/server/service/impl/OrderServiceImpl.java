@@ -8,9 +8,14 @@ import org.example.server.model.potions.Potion;
 import org.example.server.repository.OrderRepository;
 import org.example.server.service.OrderService;
 import org.springframework.context.annotation.Primary;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.PageImpl;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 
 @RequiredArgsConstructor
@@ -56,5 +61,23 @@ public class OrderServiceImpl implements OrderService {
     @Override
     public List<Order> getAllActiveOrders() {
         return orderRepository.findAllActiveOrders();
+    }
+
+    @Override
+    public Page<Order> findPaginated(Pageable pageable) {
+        int pageSize = pageable.getPageSize();
+        int currentPage = pageable.getPageNumber();
+        int startItem = currentPage * pageSize;
+        List<Order> list;
+        List<Order> allOrders = getAllOrders();
+
+        if (allOrders.size() < startItem) {
+            list = Collections.emptyList();
+        } else {
+            int toIndex = Math.min(startItem + pageSize, allOrders.size());
+            list = allOrders.subList(startItem, toIndex);
+        }
+
+        return new PageImpl<>(list, PageRequest.of(currentPage, pageSize), allOrders.size());
     }
 }

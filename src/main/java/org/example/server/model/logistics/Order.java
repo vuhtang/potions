@@ -21,7 +21,7 @@ public class Order {
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "customer_id", referencedColumnName = "id", nullable = false)
-    private Customer customer_id;
+    private Customer customer;
 
     @Column(name = "creation_time")
     private Timestamp creation_time;

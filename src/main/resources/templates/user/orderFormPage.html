@@ -13,10 +13,9 @@
 
 <div class="text-field text-field_floating-3">
     <!--    todo дописать форму для отправки на контроллер-->
-    <form id="createOrderForm" method="POST" action="http://localhost:8080/orders/createOrder">
-        <input class="text-field__input" type="userName" id="userName" name="userName">
-        <label class="text-field__label" for="userName">Введите свой никнейм</label>
-        <input type="hidden" id="cartInput" name="cartInput" th:value="${cart.getItems()}">
+    <form id="createOrderForm" action="#" th:method="post" th:action="@{/orders/createOrder}" th:object="${userNumberForm}">
+        <input class="text-field__input" type="number" id="userId" th:value="${userNumberForm.userId}" name="userId">
+        <label class="text-field__label" for="userId">Введите свой айди</label>
     </form>
 </div>
 <h2>Выбранные зелья:</h2>
@@ -97,7 +96,6 @@
 <a href="#" class="buttons" id="redirectBackButton">На главную</a>
 
 <script th:src="@{/js/user/cartList.js}"></script>
-<script th:src="@{/js/user/orderForm.js}"></script>
 <script th:src="@{/js/user/orderFormPage.js}"></script>
 <script th:src="@{/js/general/goto.js}"></script>
 <script th:src="@{/js/user/dropList.js}"></script>

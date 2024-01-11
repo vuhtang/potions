@@ -1,10 +1,7 @@
 package org.example.server.controller;
 
 import lombok.RequiredArgsConstructor;
-import org.example.server.model.Cart;
-import org.example.server.model.CartItem;
-import org.example.server.model.CountChangerForm;
-import org.example.server.model.OrderNumberForm;
+import org.example.server.model.*;
 import org.example.server.model.logistics.OrderStatus;
 import org.example.server.model.potions.Potion;
 import org.example.server.service.OrderService;
@@ -17,7 +14,7 @@ import java.util.List;
 
 @RequiredArgsConstructor
 @Controller
-@SessionAttributes({"cart","allPotions"})
+@SessionAttributes({"cart","allPotions","userNumberForm"})
 @RequestMapping("/orders")
 public class OrderController {
 
@@ -26,8 +23,8 @@ public class OrderController {
     private final PotionsIngredientsService potionsIngredientsService;
 
     @PostMapping("/createOrder")
-    String createOrderForm(@ModelAttribute Integer userId, @ModelAttribute Cart cart, Model model) {
-        Integer orderId = orderService.createOrder(userId, cart.getItems());
+    String createOrderForm(@ModelAttribute UserNumberForm userNumberForm, @ModelAttribute Cart cart, Model model) {
+        Integer orderId = orderService.createOrder(userNumberForm.getUserId(), cart.getItems());
         model.addAttribute("orderId", orderId);
         return "user/orderCreateComplete";
     }
@@ -73,6 +70,8 @@ public class OrderController {
         model.addAttribute("cart", cart);
         CountChangerForm countChangerForm = new CountChangerForm();
         model.addAttribute("countChangerForm", countChangerForm);
+        UserNumberForm userNumberForm = new UserNumberForm();
+        model.addAttribute("userNumberForm", userNumberForm);
         List<Potion> allPotions = potionsIngredientsService.getAllPotions();
         model.addAttribute("allPotions", allPotions);
         return "user/orderFormPage";
@@ -89,7 +88,6 @@ public class OrderController {
     String addPotionToCart(@ModelAttribute CountChangerForm countChangerForm, @ModelAttribute Cart cart, Model model) {
         CartItem item = countChangerForm.getItem();
         item.setCount(1);
-        cart.addItem(item);
         cart.addItem(item);
         return "user/orderFormPage";
     }

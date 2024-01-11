@@ -13,7 +13,7 @@
 
 <div class="text-field text-field_floating-3">
     <form id="checkStatus" action="#" th:method="post" th:action="@{/orders/checkStatus}" th:object="${orderNumberForm}">
-        <input class="text-field__input" type="number" id="numberOrder" name="numberOrder" th:field="*{orderId}">
+        <input class="text-field__input" type="number" id="numberOrder" name="numberOrder" th:field="*{getOrderId}">
         <label class="text-field__label" for="numberOrder">Номер заказа</label>
         <h2 th:text="${status}"/>
         <button type="submit" id="getStatusButton">Проверить статус заказа</button>

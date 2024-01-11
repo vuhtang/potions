@@ -13,7 +13,7 @@
 
 <div class="text-field text-field_floating-3">
     <!--    todo дописать форму для отправки на контроллер-->
-    <form  id="createOrderForm" method="POST" action="http://localhost:8080/orders/createOrder">
+    <form id="createOrderForm" method="POST" action="http://localhost:8080/orders/createOrder">
         <input class="text-field__input" type="userName" id="userName" name="userName">
         <label class="text-field__label" for="userName">Введите свой никнейм</label>
         <input type="hidden" id="cartInput" name="cartInput" th:value="${cart.getItems()}">
@@ -37,13 +37,16 @@
         <tr th:each="item : ${cart.getItems()}">
             <td th:text="${item.potion.name}"></td>
             <td>
-                <button th:action="${cart.decCount(item)}">-</button>
-                <span th:text="${item.count}"></span>
-                <button th:action="${cart.incCount(item)}">+</button>
+                <form action="#" th:method="post" th:action="@{/orders/addItemToCart}" th:object="${item}">
+                    <label>
+                        jopa
+<!--                        <input type="text" th:field="*{count}">-->
+                    </label>
+                    <button type="submit">Применить</button>
+                </form>
             </td>
             <td>
-                <form th:action="${cart.deleteItem(item)}" method="post">
-                    <input type="hidden" name="potionId" th:value="${item}"/>
+                <form action="#" th:method="post" th:action="@{/orders/removeCartItem}" th:object="${item}">
                     <button type="submit">Удалить</button>
                 </form>
             </td>
@@ -55,15 +58,13 @@
 <div class="all-items">
     <a href="#" class="buttons" id="potionsList">Список доступных зелий</a>
     <div class="item-list">
-        <ul id="dropdownList" style="display: none">
-<!--            todo когда на бэке будут методы то нужно вернуть-->
-            <li th:each="item : ${allPotions}">
-                <span th:text="${item.potion.name}"></span>
-                <button th:action="${cart.addItem(item)}">Добавить</button>
+        <ul id="dropdownList">
+            <li th:each="potion : ${allPotions}">
+                <form th:method="post" th:action="@{/orders/addPotionToCart}" th:object="${potion}">
+                    <span th:text="${potion.name}"></span>
+                    <button type="submit">Добавить</button>
+                </form>
             </li>
-            <li>1</li>
-            <li>2</li>
-            <li>3</li>
         </ul>
     </div>
 </div>

@@ -80,4 +80,22 @@ public class OrderServiceImpl implements OrderService {
 
         return new PageImpl<>(list, PageRequest.of(currentPage, pageSize), allOrders.size());
     }
+
+    @Override
+    public Page<Order> findPaginatedActive(Pageable pageable) {
+        int pageSize = pageable.getPageSize();
+        int currentPage = pageable.getPageNumber();
+        int startItem = currentPage * pageSize;
+        List<Order> list;
+        List<Order> allOrders = getAllActiveOrders();
+
+        if (allOrders.size() < startItem) {
+            list = Collections.emptyList();
+        } else {
+            int toIndex = Math.min(startItem + pageSize, allOrders.size());
+            list = allOrders.subList(startItem, toIndex);
+        }
+
+        return new PageImpl<>(list, PageRequest.of(currentPage, pageSize), allOrders.size());
+    }
 }

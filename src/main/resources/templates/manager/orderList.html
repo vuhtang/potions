@@ -8,5 +8,38 @@
 </head>
 <body>
 <h1>OrderList</h1>
+<table border="2">
+    <thead>
+    <tr>
+        <th>Order Id</th>
+        <th>Customer Id</th>
+        <th>Creation Time</th>
+        <th>Completion Time</th>
+        <th>Status</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr th:each="order, iStat : ${orderPage.content}"
+        th:style="${iStat.odd}? 'font-weight: bold;'"
+        th:alt-title="${iStat.even}? 'even' : 'odd'">
+
+        <td th:text="${order.id}"></td>
+        <td th:text="${order.customer.id}"></td>
+        <td th:text="${order.creation_time}"></td>
+        <td th:text="${order.completion_time}"></td>
+        <td th:text="${order.status.status}"></td>
+    </tr>
+    </tbody>
+</table>
+<div th:if="${orderPage.totalPages > 0}">
+    <a th:style="${orderPage.number > 0 ? '' : 'pointer-events: none'}"
+       th:href="@{/manager/orderList(size=${orderPage.size}, page=${1})}">First</a>
+    <a th:style="${orderPage.number > 0 ? '' : 'pointer-events: none'}"
+       th:href="@{/manager/orderList(size=${orderPage.size}, page=${orderPage.number})}">Prev</a>
+    <a th:style="${orderPage.number + 1 < orderPage.totalPages ? '' : 'pointer-events: none' }"
+       th:href="@{/manager/orderList(size=${orderPage.size}, page=${orderPage.number + 2})}">Next</a>
+    <a th:style="${orderPage.number + 1 < orderPage.totalPages ? '' : 'pointer-events: none'}"
+       th:href="@{/manager/orderList(size=${orderPage.size}, page=${orderPage.totalPages})}">Last</a>
+</div>
 </body>
 </html>

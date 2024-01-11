@@ -28,14 +28,14 @@ public class ManagerController {
     private final OrderService orderService;
 
     @PostMapping("/setEP")
-    String setEPService(@ModelAttribute EPIdForm idEPform, Model model){
+    String setEPService(@ModelAttribute EPIdForm idEPform, Model model) {
         EnterprisePoint ep = epService.getEnterprisePointById(idEPform.getIdEP());
         model.addAttribute("EP", ep);
         return ("manager/main");
     }
 
     @GetMapping("/start")
-    String getStartManagerPage(Model model){
+    String getStartManagerPage(Model model) {
         model.addAttribute("idEPform", new EPIdForm());
         return ("manager/start");
     }
@@ -74,7 +74,24 @@ public class ManagerController {
     }
 
     @GetMapping("/orderList")
-    String getOrderListPage(Model model) {
+    String getOrderListPage(Model model,
+                            @RequestParam Optional<Integer> page,
+                            @RequestParam Optional<Integer> size
+    ) {
+        int currentPage = page.orElse(1);
+        int pageSize = size.orElse(10);
+
+        Page<Order> orderPage = orderService.findPaginatedActive(PageRequest.of(currentPage - 1, pageSize));
+
+        model.addAttribute("orderPage", orderPage);
+
+        int totalPages = orderPage.getTotalPages();
+        if (totalPages > 0) {
+            List<Integer> pageNumbers = IntStream.rangeClosed(1, totalPages)
+                    .boxed()
+                    .collect(Collectors.toList());
+            model.addAttribute("pageNumbers", pageNumbers);
+        }
         return "manager/orderList";
     }
 

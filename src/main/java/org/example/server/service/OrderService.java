@@ -20,4 +20,5 @@ public interface OrderService {
     List<Order> getAllActiveOrders();
 
     Page<Order> findPaginated(Pageable pageable);
+    Page<Order> findPaginatedActive(Pageable pageable);
 }

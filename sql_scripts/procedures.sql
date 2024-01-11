@@ -180,5 +180,6 @@ $$;
 
 -- CALL createIngredientsDelivery(5, 7, 0, array[1], array[5]);
 
+select * from orders join order_status on orders.order_status = order_status.id  where order_status.status != 'Passed'
 
 

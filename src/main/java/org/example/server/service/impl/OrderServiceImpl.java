@@ -47,4 +47,14 @@ public class OrderServiceImpl implements OrderService {
         }
         return orderRepository.createOrder(userId, potions, amounts);
     }
+
+    @Override
+    public List<Order> getAllOrders() {
+        return orderRepository.findAll();
+    }
+
+    @Override
+    public List<Order> getAllActiveOrders() {
+        return orderRepository.findAllActiveOrders();
+    }
 }

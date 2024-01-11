@@ -11,5 +11,5 @@ import java.util.List;
 @Repository
 public interface OrderRepository extends JpaRepository<Order, Integer> {
     @Procedure(procedureName = "createOrder")
-    void createOrder(Long customerId, List<Potion> potions, List<Integer> amounts);
+    Integer createOrder(Integer customerId, List<Potion> potions, List<Integer> amounts);
 }

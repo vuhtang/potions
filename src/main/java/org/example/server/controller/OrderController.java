@@ -27,9 +27,10 @@ public class OrderController {
     private final PotionsIngredientsService potionsIngredientsService;
 
     @PostMapping("/createOrder")
-    public void createOrderForm(String userName, List<CartItem> cartInput, Model model) {
-
-        model.addAttribute("status", "Готов");
+    String createOrderForm(@ModelAttribute Integer userId, Model model) {
+        Integer orderId =  orderService.createOrder(userId, cart.getItems());
+        model.addAttribute("orderId", orderId);
+        return "user/orderCreateComplete";
     }
 
     @PostMapping("/checkStatus")
@@ -62,8 +63,7 @@ public class OrderController {
 
     @PostMapping("/addPotionToCart")
     String addPotionToCart(@ModelAttribute Potion potion, Model model) {
-        if (cart != null)
-            cart.addItem(potion);
+        cart.addItem(potion);
         model.addAttribute("cart", cart);
         List<Potion> allPotions = potionsIngredientsService.getAllPotions();
         model.addAttribute("allPotions", allPotions);

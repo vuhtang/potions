@@ -39,8 +39,7 @@
             <td>
                 <form action="#" th:method="post" th:action="@{/orders/addItemToCart}" th:object="${item}">
                     <label>
-                        jopa
-<!--                        <input type="text" th:field="*{count}">-->
+                        Количество: <input type="text" th:field="*{count}">
                     </label>
                     <button type="submit">Применить</button>
                 </form>

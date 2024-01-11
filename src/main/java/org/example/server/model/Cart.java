@@ -24,10 +24,6 @@ public class Cart {
 
     private final List<CartItem> items = new ArrayList<>();
 
-//    {
-//        items.add(new CartItem(new Potion(), 0));
-//    }
-
     public void deleteItem(CartItem item) {
         if (item == null) return;
         for (CartItem existingItem : items) {

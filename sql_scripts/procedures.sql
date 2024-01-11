@@ -84,7 +84,7 @@ BEGIN
 END
 $$;
 
-CREATE OR REPLACE PROCEDURE createOrder(customer_t_id int, potions int[], amounts int[])
+CREATE OR REPLACE PROCEDURE createOrder(customer_t_id int, potions int[], amounts int[], out res int)
     LANGUAGE plpgsql
 AS
 $$
@@ -111,6 +111,7 @@ BEGIN
             values (customer_order_id, potions[counter], amounts[counter]);
         end loop;
 
+    res := customer_order_id;
 END;
 $$;
 

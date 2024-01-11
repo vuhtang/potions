@@ -10,14 +10,14 @@ import org.springframework.web.bind.annotation.RestController;
 
 @RequiredArgsConstructor
 @RestController
-@RequestMapping(path = "api/customers")
+@RequestMapping(path = "/customers")
 public class CustomerController {
 
     private final CustomerService customerService;
 
     @GetMapping("/{customerId}")
     Customer getCustomerById(
-            @PathVariable Long customerId
+            @PathVariable Integer customerId
     ) {
         return customerService.getCustomerById(customerId);
     }

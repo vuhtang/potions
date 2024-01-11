@@ -15,7 +15,7 @@ public class TestController {
 
     @GetMapping("user/start")
     String getTestString(Model model) {
-        Long id = Long.parseLong("34");
+        Integer id = Integer.parseInt("34");
         Customer customer = customerService.getCustomerById(id);
         model.addAttribute("customer", customer);
         return "user/start";

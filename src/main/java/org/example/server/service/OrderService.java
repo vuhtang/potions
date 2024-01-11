@@ -8,7 +8,4 @@ public interface OrderService {
     OrderStatus takeOrderStatus(int orderId);
 
     Order getOrderById(int orderId);
-
-    //получать все ордера не прикол их миллион
-//    List<Order> getAllOrders();
 }

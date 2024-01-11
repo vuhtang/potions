@@ -57,10 +57,10 @@
     <div class="item-list">
         <ul id="dropdownList" style="display: none">
 <!--            todo когда на бэке будут методы то нужно вернуть-->
-<!--            <li th:each="item : ${cart.getItems()}">-->
-<!--                <span th:text="${item.potion.name}"></span>-->
-<!--                <button th:action="${cart.addItem(item)}">Добавить</button>-->
-<!--            </li>-->
+            <li th:each="item : ${allPotions}">
+                <span th:text="${item.potion.name}"></span>
+                <button th:action="${cart.addItem(item)}">Добавить</button>
+            </li>
             <li>1</li>
             <li>2</li>
             <li>3</li>

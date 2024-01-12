@@ -35,6 +35,11 @@ public class ManagerController {
         return ("manager/main");
     }
 
+    @GetMapping("/main")
+    String getMain(Model model){
+        return ("manager/main");
+    }
+
     @GetMapping("/start")
     String getStartManagerPage(Model model) {
         model.addAttribute("idEPform", new EPIdForm());
@@ -97,9 +102,7 @@ public class ManagerController {
     }
 
     @GetMapping("/warehouse")
-    String getWarehousePage(@ModelAttribute EnterprisePoint ep , Model model) {
-
-        model.addAttribute("EP", ep);
+    String getWarehousePage(Model model) {
         return "manager/warehouse";
     }
 

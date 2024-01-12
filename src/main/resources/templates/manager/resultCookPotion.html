@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <link th:href="@{/styles/general/general.css}" rel="stylesheet"/>
+    <link th:href="@{/styles/manager/resultCookPage.css}" rel="stylesheet"/>
+</head>
+<body>
+
+<h1 class="resultCookPotion">Зелье готов и ждёт на складе!</h1>
+
+<button type="button" class="buttons" onclick="goTo('manager/factoryPotion')" id="toBackPage">Назад к таблице</button>
+
+<script th:src="@{/js/general/goto.js}"></script>
+
+</body>
+</html>

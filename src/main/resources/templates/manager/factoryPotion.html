@@ -1,25 +1,38 @@
 <!DOCTYPE html>
-<html lang="en"  xmlns:th="http://www.thymeleaf.org">
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
     <title>factoryPotion</title>
     <link th:href="@{/styles/general/general.css}" rel="stylesheet"/>
     <link th:href="@{/styles/general/inputSpace.css}" rel="stylesheet"/>
+    <link th:href="@{/styles/manager/generalM.css}" rel="stylesheet"/>
 </head>
 <body>
 <h1>factoryPotion</h1>
 
-<table border="2">
-    <tr th:each="potion: ${allPotions}">
-        <td th:text="${potion.name}" />
-        <td>
-            Проверить наличие ингредиентов
-        </td>
-        <td>
-            Начать варить
-        </td>
-    </tr>
-</table>
+<div class="selected-items tbl-content">
+    <table>
+        <tr th:each="potion: ${allPotions}">
+            <td th:text="${potion.name}"/>
+            <td>
+                <div class="inLine">
+                    <form action="#" th:method="post" th:action="@{/manager/checkIngredientsForPotion}" th:object="${potionNumberForm}">
+                        <input hidden="hidden" th:value="${potion.id}" name="potionId">
+                        <button class="elementInLine" type="submit">Проверить наличие ингредиентов</button>
+                    </form>
+                    <form>
+                        <button class="elementInLine" type="submit">Начать варить</button>
+                    </form>
+                </div>
+            </td>
+
+        </tr>
+    </table>
+</div>
+
+<button type="button" class="buttons" onclick="goTo('manager/main')" id="toBackPage">На главную</button>
+
+<script th:src="@{/js/general/goto.js}"></script>
 
 </body>
 </html>

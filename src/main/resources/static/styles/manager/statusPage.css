@@ -1,0 +1,12 @@
+.textBadStatus {
+    color: red;
+}
+
+.textGoodStatus {
+    color: green;
+}
+
+button {
+    width: 450px;
+    height: 50px;
+}

@@ -7,6 +7,7 @@ import org.example.server.model.enterprise.EnterprisePointWarehouse;
 import org.example.server.model.entities.Worker;
 import org.example.server.model.logistics.Order;
 import org.example.server.model.potions.Ingredient;
+import org.example.server.model.potions.Potion;
 import org.example.server.repository.EPColdWarehouseRepository;
 import org.example.server.repository.EPRepository;
 import org.example.server.repository.EPWarehouseRepository;
@@ -30,6 +31,11 @@ public class EPServiceImpl implements EPService {
     private final EPWarehouseRepository epWarehouseRepository;
     private final EPColdWarehouseRepository epColdWarehouseRepository;
     private final EnterpriseDeliveryRepository enterpriseDeliveryRepository;
+
+    @Override
+    public void addPotionToColdWarehouse(Potion potion, EnterprisePoint ep) {
+
+    }
 
     @Override
     public EnterprisePoint getEnterprisePointById(int idEP) {

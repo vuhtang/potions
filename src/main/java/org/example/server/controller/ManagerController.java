@@ -4,6 +4,7 @@ package org.example.server.controller;
 import lombok.RequiredArgsConstructor;
 import org.example.server.model.EPIdForm;
 import org.example.server.model.OrderNumberForm;
+import org.example.server.model.PotionNumberForm;
 import org.example.server.model.enterprise.EnterprisePoint;
 import org.example.server.model.enterprise.EnterprisePointColdWarehouse;
 import org.example.server.model.enterprise.EnterprisePointWarehouse;
@@ -33,6 +34,16 @@ public class ManagerController {
     private final OrderService orderService;
     private final PotionsIngredientsService potionsIngredientsService;
 
+    @PostMapping("/checkIngredientsForPotion")
+    String checkIngredientForPotion (@ModelAttribute PotionNumberForm potionNumberForm, Model model){
+        if(potionsIngredientsService.checkIngredientsForPotion(potionNumberForm, (EnterprisePoint) model.getAttribute("ep"))){
+            model.addAttribute("status", 1);
+        }else{
+            model.addAttribute("status", 0);
+        }
+        return ("manager/statusCheckIngredientsForPotion");
+    }
+
     @PostMapping("/setEP")
     String setEPService(@ModelAttribute EPIdForm idEPform, Model model) {
         EnterprisePoint ep = epService.getEnterprisePointById(idEPform.getIdEP());
@@ -53,6 +64,7 @@ public class ManagerController {
 
     @GetMapping("/factoryPotion")
     String getFactoryPotionPage(Model model) {
+        model.addAttribute("potionNumberForm", new PotionNumberForm());
         List<Potion> allPotion = potionsIngredientsService.getAllPotions();
         model.addAttribute("allPotions", allPotion);
         return "manager/factoryPotion";

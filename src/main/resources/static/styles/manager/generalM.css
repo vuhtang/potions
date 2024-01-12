@@ -47,3 +47,11 @@ a.button {
 .buttonInLine > a.button {
     margin: 10px;
 }
+
+.inLine {
+    display: flex;
+}
+
+.inLine > .elementInLine{
+    margin: 10px;
+}

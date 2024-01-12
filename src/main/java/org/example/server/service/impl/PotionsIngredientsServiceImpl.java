@@ -43,9 +43,10 @@ public class PotionsIngredientsServiceImpl implements PotionsIngredientsService 
         Map<Ingredient, Integer> ingredientsAmounts = getIngredientsAndAmounts(potions, amounts);
         List<EnterprisePointWarehouse> epwList = epService.getEPWarehouseItemsByEP(ep);
         for (EnterprisePointWarehouse epw: epwList) {
-            Integer i = ingredientsAmounts.get(epw.getIngredient());
-            if (i == null)
-                return false;
+            Ingredient ingredient = epw.getIngredient();
+            if (!ingredientsAmounts.containsKey(ingredient))
+                continue;
+            Integer i = ingredientsAmounts.get(ingredient);
             i -= epw.getAmountOfIngredient();
             if (i > 0)
                 return false;

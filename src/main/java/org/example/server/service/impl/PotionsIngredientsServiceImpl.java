@@ -98,7 +98,7 @@ public class PotionsIngredientsServiceImpl implements PotionsIngredientsService 
             if (i == null)
                 return false;
             i -= epw.getAmountOfIngredient();
-            if (i < 0)
+            if (i > 0)
                 return false;
             ingredientsAmounts.put(epw.getIngredient(), i);
         }

@@ -44,6 +44,12 @@ public class ManagerController {
         return ("manager/statusCheckIngredientsForPotion");
     }
 
+    @PostMapping("/cookPotion")
+    String cookPotion (@ModelAttribute PotionNumberForm potionNumberForm, Model model){
+        potionsIngredientsService.createPotionAndStoreInEP(potionNumberForm, (EnterprisePoint) model.getAttribute("ep"));
+        return ("manager/resultCookPotion");
+    }
+
     @PostMapping("/setEP")
     String setEPService(@ModelAttribute EPIdForm idEPform, Model model) {
         EnterprisePoint ep = epService.getEnterprisePointById(idEPform.getIdEP());

@@ -6,9 +6,10 @@
     <link th:href="@{/styles/general/general.css}" rel="stylesheet"/>
     <link th:href="@{/styles/general/inputSpace.css}" rel="stylesheet"/>
     <link th:href="@{/styles/manager/generalM.css}" rel="stylesheet"/>
+    <link th:href="@{/styles/manager/factoryPage.css}" rel="stylesheet"/>
 </head>
 <body>
-<h1>factoryPotion</h1>
+<h1>Варка зелий</h1>
 
 <div class="selected-items tbl-content">
     <table>
@@ -20,7 +21,7 @@
                         <input hidden="hidden" th:value="${potion.id}" name="potionId">
                         <button class="elementInLine" type="submit">Проверить наличие ингредиентов</button>
                     </form>
-                    <form>
+                    <form action="#" th:method="post" th:action="@{/manager/cookPotion}" th:object="${potionNumberForm}">
                         <button class="elementInLine" type="submit">Начать варить</button>
                     </form>
                 </div>

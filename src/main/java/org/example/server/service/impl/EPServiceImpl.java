@@ -103,17 +103,19 @@ public class EPServiceImpl implements EPService {
     @Override
     public void addPotionToColdWarehouse(Potion potion, EnterprisePoint ep) {
         List<EnterprisePointColdWarehouse> epcwList = epColdWarehouseRepository.findAllByEnterprisePoint_IdEquals(ep.getId());
-        if (epcwList.size() == 0) {
-            EnterprisePointColdWarehouse epcw = new EnterprisePointColdWarehouse();
-            epcw.setPotion(potion);
-            epcw.setAmountOfPotions(1);
-            epcw.setEnterprisePoint(ep);
-            epColdWarehouseRepository.saveAndFlush(epcw);
-            return;
+
+        for (EnterprisePointColdWarehouse epcw : epcwList) {
+            if (potion.equals(epcw.getPotion())) {
+                epcw.setAmountOfPotions(epcw.getAmountOfPotions() + 1);
+                epColdWarehouseRepository.saveAndFlush(epcw);
+                return;
+            }
         }
 
-        EnterprisePointColdWarehouse epcw = epcwList.get(0);
-        epcw.setAmountOfPotions(epcw.getAmountOfPotions() + 1);
+        EnterprisePointColdWarehouse epcw = new EnterprisePointColdWarehouse();
+        epcw.setPotion(potion);
+        epcw.setAmountOfPotions(1);
+        epcw.setEnterprisePoint(ep);
         epColdWarehouseRepository.saveAndFlush(epcw);
     }
 }

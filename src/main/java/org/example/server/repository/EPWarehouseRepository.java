@@ -8,6 +8,6 @@ import java.util.List;
 
 public interface EPWarehouseRepository extends JpaRepository<EnterprisePointWarehouse, Integer> {
 
-    @Query(value = "select * from enterprise_point_warehouse where enterprise_point_warehouse.ep_id = EPId", nativeQuery = true)
-    List<EnterprisePointWarehouse> findAllByEPId(Integer EPId);
+    @Query(value = "select * from enterprise_point_warehouse where enterprise_point_warehouse.ep_id = ?1", nativeQuery = true)
+    List<EnterprisePointWarehouse> findAllByEnterprisePoint_Id(Integer EPId);
 }

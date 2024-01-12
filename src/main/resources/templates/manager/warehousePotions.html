@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Warehouse</title>
+    <link th:href="@{/styles/general/general.css}" rel="stylesheet"/>
+    <link th:href="@{/styles/user/start.css}" rel="stylesheet" />
+</head>
+<body>
+<h1>Warehouse</h1>
+<span th:text="${ep.location}"></span>
+<table border="2">
+    <thead>
+    <tr>
+        <th>Row Id</th>
+        <th>EP Id</th>
+        <th>Potion</th>
+        <th>Amount</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr th:each="epcw, iStat : ${epcwPage.content}"
+        th:style="${iStat.odd}? 'font-weight: bold;'"
+        th:alt-title="${iStat.even}? 'even' : 'odd'">
+
+        <td th:text="${epcw.id}"></td>
+        <td th:text="${epcw.enterprisePoint.name}"></td>
+        <td th:text="${epcw.potion.name}"></td>
+        <td th:text="${epcw.amountOfPotions}"></td>
+    </tr>
+    </tbody>
+</table>
+<div th:if="${epcwPage.totalPages > 0}">
+    <a th:style="${epcwPage.number > 0 ? '' : 'pointer-events: none'}"
+       th:href="@{/manager/warehousePotions(size=${epcwPage.size}, page=${1})}">First</a>
+    <a th:style="${epcwPage.number > 0 ? '' : 'pointer-events: none'}"
+       th:href="@{/manager/warehousePotions(size=${epcwPage.size}, page=${epcwPage.number})}">Prev</a>
+    <a th:style="${epcwPage.number + 1 < epcwPage.totalPages ? '' : 'pointer-events: none' }"
+       th:href="@{/manager/warehousePotions(size=${epcwPage.size}, page=${epcwPage.number + 2})}">Next</a>
+    <a th:style="${epcwPage.number + 1 < epcwPage.totalPages ? '' : 'pointer-events: none'}"
+       th:href="@{/manager/warehousePotions(size=${epcwPage.size}, page=${epcwPage.totalPages})}">Last</a>
+</div>
+</body>
+</html>

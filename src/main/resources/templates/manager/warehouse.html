@@ -4,10 +4,19 @@
     <meta charset="UTF-8">
     <title>Warehouse</title>
     <link th:href="@{/styles/general/general.css}" rel="stylesheet"/>
-    <link th:href="@{/styles/general/inputSpace.css}" rel="stylesheet"/>
+    <link th:href="@{/styles/user/start.css}" rel="stylesheet" />
 </head>
 <body>
 <h1>Warehouse</h1>
 <span th:text="${ep.location}"></span>
+
+<div class="links-container">
+
+<button type="button" class="buttons" onclick="goTo('manager/warehousePotions')" id="redirectStatusButton">Зелья</button>
+<button type="button" class="buttons" onclick="goTo('manager/warehouseIngredients')" id="redirectOrderButton">Ингредиенты</button>
+
+</div>
+<script th:src="@{/js/general/goto.js}"></script>
+
 </body>
 </html>

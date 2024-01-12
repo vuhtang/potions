@@ -5,9 +5,12 @@ import lombok.RequiredArgsConstructor;
 import org.example.server.model.EPIdForm;
 import org.example.server.model.OrderNumberForm;
 import org.example.server.model.enterprise.EnterprisePoint;
+import org.example.server.model.enterprise.EnterprisePointColdWarehouse;
+import org.example.server.model.enterprise.EnterprisePointWarehouse;
 import org.example.server.model.logistics.Order;
 import org.example.server.service.EPService;
 import org.example.server.service.OrderService;
+import org.example.server.service.PotionsIngredientsService;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Controller;
@@ -27,6 +30,7 @@ public class ManagerController {
 
     private final EPService epService;
     private final OrderService orderService;
+    private final PotionsIngredientsService potionsIngredientsService;
 
     @PostMapping("/setEP")
     String setEPService(@ModelAttribute EPIdForm idEPform, Model model) {
@@ -103,7 +107,56 @@ public class ManagerController {
 
     @GetMapping("/warehouse")
     String getWarehousePage(Model model) {
+//        model.addAttribute("EP", ep);
         return "manager/warehouse";
+    }
+
+    @GetMapping("/warehousePotions")
+    String getWarehousePotionsPage(
+            Model model,
+            @RequestParam Optional<Integer> page,
+            @RequestParam Optional<Integer> size
+    ) {
+        int currentPage = page.orElse(1);
+        int pageSize = size.orElse(10);
+
+        Page<EnterprisePointColdWarehouse> epcwPage = epService.findPaginatedEPCW(PageRequest.of(currentPage - 1, pageSize), (EnterprisePoint) model.getAttribute("ep"));
+
+        model.addAttribute("epcwPage", epcwPage);
+
+        int totalPages = epcwPage.getTotalPages();
+        if (totalPages > 0) {
+            List<Integer> pageNumbers = IntStream.rangeClosed(1, totalPages)
+                    .boxed()
+                    .collect(Collectors.toList());
+            model.addAttribute("pageNumbers", pageNumbers);
+        }
+
+        return "manager/warehousePotions";
+    }
+
+    @GetMapping("/warehouseIngredients")
+    String getWarehouseIngredientsPage(
+            Model model,
+            @RequestParam Optional<Integer> page,
+            @RequestParam Optional<Integer> size
+    ) {
+        int currentPage = page.orElse(1);
+        int pageSize = size.orElse(10);
+
+        Page<EnterprisePointWarehouse> epwPage = epService.findPaginatedEPW(PageRequest.of(currentPage - 1, pageSize), (EnterprisePoint) model.getAttribute("ep"));
+
+        model.addAttribute("epwPage", epwPage);
+
+        int totalPages = epwPage.getTotalPages();
+        if (totalPages > 0) {
+            List<Integer> pageNumbers = IntStream.rangeClosed(1, totalPages)
+                    .boxed()
+                    .collect(Collectors.toList());
+            model.addAttribute("pageNumbers", pageNumbers);
+        }
+
+        return "manager/warehouseIngredients";
     }
 
 }

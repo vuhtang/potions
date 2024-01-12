@@ -8,6 +8,7 @@ import org.example.server.model.enterprise.EnterprisePoint;
 import org.example.server.model.enterprise.EnterprisePointColdWarehouse;
 import org.example.server.model.enterprise.EnterprisePointWarehouse;
 import org.example.server.model.logistics.Order;
+import org.example.server.model.potions.Potion;
 import org.example.server.service.EPService;
 import org.example.server.service.OrderService;
 import org.example.server.service.PotionsIngredientsService;
@@ -52,6 +53,8 @@ public class ManagerController {
 
     @GetMapping("/factoryPotion")
     String getFactoryPotionPage(Model model) {
+        List<Potion> allPotion = potionsIngredientsService.getAllPotions();
+        model.addAttribute("allPotions", allPotion);
         return "manager/factoryPotion";
     }
 
@@ -106,8 +109,7 @@ public class ManagerController {
     }
 
     @GetMapping("/warehouse")
-    String getWarehousePage(Model model) {
-//        model.addAttribute("EP", ep);
+    String getWarehousePage() {
         return "manager/warehouse";
     }
 

@@ -8,5 +8,18 @@
 </head>
 <body>
 <h1>factoryPotion</h1>
+
+<table border="2">
+    <tr th:each="potion: ${allPotions}">
+        <td th:text="${potion.name}" />
+        <td>
+            Проверить наличие ингредиентов
+        </td>
+        <td>
+            Начать варить
+        </td>
+    </tr>
+</table>
+
 </body>
 </html>

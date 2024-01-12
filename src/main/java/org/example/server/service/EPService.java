@@ -6,6 +6,7 @@ import org.example.server.model.enterprise.EnterprisePointWarehouse;
 import org.example.server.model.entities.Worker;
 import org.example.server.model.logistics.Order;
 import org.example.server.model.potions.Ingredient;
+import org.example.server.model.potions.Potion;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 
@@ -17,6 +18,8 @@ public interface EPService {
     List<EnterprisePointColdWarehouse> getAllEPColdWarehouseItems();
 
     List<EnterprisePointWarehouse> getAllEPWarehouseItems();
+
+    void addPotionToColdWarehouse(Potion potion, EnterprisePoint ep);
 
     List<EnterprisePointWarehouse> getEPWarehouseItemsByEP(EnterprisePoint ep);
 

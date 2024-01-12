@@ -9,10 +9,7 @@ import org.example.server.model.potions.Ingredient;
 import org.example.server.model.potions.OrdersToPotions;
 import org.example.server.model.potions.Potion;
 import org.example.server.model.potions.PotionToIngr;
-import org.example.server.repository.IngredientsRepository;
-import org.example.server.repository.PotionToIngrRepository;
-import org.example.server.repository.PotionToOrderRepository;
-import org.example.server.repository.PotionsRepository;
+import org.example.server.repository.*;
 import org.example.server.service.EPService;
 import org.example.server.service.PotionsIngredientsService;
 import org.springframework.context.annotation.Primary;
@@ -29,6 +26,7 @@ public class PotionsIngredientsServiceImpl implements PotionsIngredientsService 
     private final IngredientsRepository ingredientsRepository;
     private final PotionToOrderRepository potionToOrderRepository;
     private final PotionToIngrRepository potionToIngrRepository;
+    private final EPWarehouseRepository epWarehouseRepository;
     private final EPService epService;
 
     @Override
@@ -49,7 +47,7 @@ public class PotionsIngredientsServiceImpl implements PotionsIngredientsService 
             if (i == null)
                 return false;
             i -= epw.getAmountOfIngredient();
-            if (i < 0)
+            if (i > 0)
                 return false;
             ingredientsAmounts.put(epw.getIngredient(), i);
         }
@@ -67,6 +65,24 @@ public class PotionsIngredientsServiceImpl implements PotionsIngredientsService 
             return;
         Potion potion = potionOptional.get();
         epService.addPotionToColdWarehouse(potion, ep);
+        List<PotionToIngr> potionToIngrs = potionToIngrRepository.findAllByPotion(potion);
+        decreaseIngredients(potionToIngrs, ep);
+    }
+
+    private void decreaseIngredients(List<PotionToIngr> potionToIngrs, EnterprisePoint ep) {
+        List<Ingredient> ingredients = potionToIngrs.stream().map(PotionToIngr::getIngredient).toList();
+        List<Integer> amounts = potionToIngrs.stream().map(PotionToIngr::getAmountOfIngredient).toList();
+        List<EnterprisePointWarehouse> epwList = epWarehouseRepository.findAllByEnterprisePoint_Id(ep.getId());
+        for (int i = 0; i < ingredients.size(); i++) {
+            Ingredient ingredient =  ingredients.get(i);
+            Integer amount = amounts.get(i);
+            Optional<EnterprisePointWarehouse> o = epwList.stream().filter(epw -> ingredient.equals(epw.getIngredient())).findFirst();
+            if (o.isEmpty())
+                return;
+            EnterprisePointWarehouse epw = o.get();
+            epw.setAmountOfIngredient(epw.getAmountOfIngredient() - amount);
+            epWarehouseRepository.save(epw);
+        }
     }
 
     @Override

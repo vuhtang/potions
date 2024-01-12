@@ -22,6 +22,7 @@ import org.springframework.stereotype.Service;
 
 import java.util.Collections;
 import java.util.List;
+import java.util.Optional;
 
 @RequiredArgsConstructor
 @Primary
@@ -31,11 +32,6 @@ public class EPServiceImpl implements EPService {
     private final EPWarehouseRepository epWarehouseRepository;
     private final EPColdWarehouseRepository epColdWarehouseRepository;
     private final EnterpriseDeliveryRepository enterpriseDeliveryRepository;
-
-    @Override
-    public void addPotionToColdWarehouse(Potion potion, EnterprisePoint ep) {
-
-    }
 
     @Override
     public EnterprisePoint getEnterprisePointById(int idEP) {
@@ -102,5 +98,22 @@ public class EPServiceImpl implements EPService {
         }
 
         return new PageImpl<>(list, PageRequest.of(currentPage, pageSize), allOrders.size());
+    }
+
+    @Override
+    public void addPotionToColdWarehouse(Potion potion, EnterprisePoint ep) {
+        List<EnterprisePointColdWarehouse> epcwList = epColdWarehouseRepository.findAllByPotion_Id(potion.getId());
+        if (epcwList.size() == 0) {
+            EnterprisePointColdWarehouse epcw = new EnterprisePointColdWarehouse();
+            epcw.setPotion(potion);
+            epcw.setAmountOfPotions(1);
+            epcw.setEnterprisePoint(ep);
+            epColdWarehouseRepository.saveAndFlush(epcw);
+            return;
+        }
+
+        EnterprisePointColdWarehouse epcw = epcwList.get(0);
+        epcw.setAmountOfPotions(epcw.getAmountOfPotions() + 1);
+        epColdWarehouseRepository.saveAndFlush(epcw);
     }
 }

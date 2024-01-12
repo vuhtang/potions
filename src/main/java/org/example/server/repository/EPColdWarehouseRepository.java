@@ -12,4 +12,7 @@ public interface EPColdWarehouseRepository extends JpaRepository<EnterprisePoint
 
     @Query(value = "select * from enterprise_point_coldwarehouse where enterprise_point_coldwarehouse.ep_id = ?1", nativeQuery = true)
     List<EnterprisePointColdWarehouse> findAllByEnterprisePoint_IdEquals(Integer EPId);
+
+    @Query(value = "select * from enterprise_point_coldwarehouse where enterprise_point_coldwarehouse.potion_id = ?1", nativeQuery = true)
+    List<EnterprisePointColdWarehouse> findAllByPotion_Id(Integer potionId);
 }

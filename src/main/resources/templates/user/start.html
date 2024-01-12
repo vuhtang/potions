@@ -3,8 +3,8 @@
 <head>
     <meta charset="UTF-8">
     <title>Title</title>
-    <link th:href="@{/styles/general/general.css}" rel="stylesheet" />
-    <link th:href="@{/styles/user/start.css}" rel="stylesheet" />
+    <link th:href="@{/styles/general/general.css}" rel="stylesheet"/>
+    <link th:href="@{/styles/user/start.css}" rel="stylesheet"/>
 </head>
 <body>
 
@@ -14,12 +14,16 @@
 </div>
 
 <div class="links-container">
-    <img th:src="@{/images/qwer1.png}" width="350" height="350"  alt="yellow_potion"/>
-
-    <button type="button" class="buttons" onclick="goTo('orders/checkStatusPage')" id="redirectStatusButton">Проверить статус заказа</button>
-    <button type="button" class="buttons" onclick="goTo('orders/createFormPage')" id="redirectOrderButton">Оформить заказ</button>
-
-    <img th:src="@{/images/qwer2.png}" width="350" height="350"  alt="red_potion"/>
+    <img th:src="@{/images/qwer1.png}" width="350" height="350" alt="yellow_potion"/>
+    <div class="forLine">
+        <button type="button" class="buttons" onclick="goTo('orders/checkStatusPage')" id="redirectStatusButton">
+            Проверить статус заказа
+        </button>
+        <button type="button" class="buttons" onclick="goTo('orders/createFormPage')" id="redirectOrderButton">Оформить
+            заказ
+        </button>
+    </div>
+    <img th:src="@{/images/qwer2.png}" width="350" height="350" alt="red_potion"/>
 </div>
 
 <script th:src="@{/js/general/goto.js}"></script>

@@ -11,13 +11,15 @@
 <body>
 
 
-<div class="text-field text-field_floating-3">
-    <!--    todo дописать форму для отправки на контроллер-->
-    <form id="createOrderForm" action="#" th:method="post" th:action="@{/orders/createOrder}" th:object="${userNumberForm}">
-        <input class="text-field__input" type="number" id="userId" th:value="${userNumberForm.userId}" name="userId">
+<!--    todo дописать форму для отправки на контроллер-->
+<form id="createOrderForm" action="#" th:method="post" th:action="@{/orders/createOrder}"
+      th:object="${userNumberForm}">
+    <div class="text-field text-field_floating-3">
+        <input class="text-field__input" id="userId" name="userId" pattern="[0-9]*" placeholder="">
         <label class="text-field__label" for="userId">Введите свой айди</label>
-    </form>
-</div>
+    </div>
+</form>
+
 <h2>Выбранные зелья:</h2>
 <div class="selected-items tbl-header">
     <table>
@@ -36,25 +38,39 @@
         <tr th:each="itemE : ${cart.getItems()}">
             <td th:text="${itemE.potion.name}"></td>
             <td>
-                <form action="#" th:method="post" th:action="@{/orders/decCount}" th:object="${countChangerForm}">
-                    <input hidden="hidden" th:value="${itemE.potion.id}" name="item.potion.id"/>
-                    <input hidden="hidden" th:value="${itemE.potion.name}" name="item.potion.name"/>
-                    <input hidden="hidden" th:value="${itemE.potion.effect.id}" name="item.potion.effect.id"/>
-                    <input hidden="hidden" th:value="${itemE.potion.effect.name}" name="item.potion.effect.name"/>
-                    <input hidden="hidden" th:value="${itemE.potion.effect.power}" name="item.potion.effect.power"/>
-                    <input hidden="hidden" th:value="${itemE.potion.effect.duration}" name="item.potion.effect.duration"/>
-                    <button type="submit">-</button>
-                </form>
-                <span th:text="${itemE.count}"></span>
-                <form action="#" th:method="post" th:action="@{/orders/incCount}" th:object="${countChangerForm}">
-                    <input hidden="hidden" th:value="${itemE.potion.id}" name="item.potion.id"/>
-                    <input hidden="hidden" th:value="${itemE.potion.name}" name="item.potion.name"/>
-                    <input hidden="hidden" th:value="${itemE.potion.effect.id}" name="item.potion.effect.id"/>
-                    <input hidden="hidden" th:value="${itemE.potion.effect.name}" name="item.potion.effect.name"/>
-                    <input hidden="hidden" th:value="${itemE.potion.effect.power}" name="item.potion.effect.power"/>
-                    <input hidden="hidden" th:value="${itemE.potion.effect.duration}" name="item.potion.effect.duration"/>
-                    <button type="submit">+</button>
-                </form>
+                <div class="inLine">
+                    <div class="elementInLine">
+                        <form action="#" th:method="post" th:action="@{/orders/decCount}"
+                              th:object="${countChangerForm}">
+                            <input hidden="hidden" th:value="${itemE.potion.id}" name="item.potion.id"/>
+                            <input hidden="hidden" th:value="${itemE.potion.name}" name="item.potion.name"/>
+                            <input hidden="hidden" th:value="${itemE.potion.effect.id}" name="item.potion.effect.id"/>
+                            <input hidden="hidden" th:value="${itemE.potion.effect.name}"
+                                   name="item.potion.effect.name"/>
+                            <input hidden="hidden" th:value="${itemE.potion.effect.power}"
+                                   name="item.potion.effect.power"/>
+                            <input hidden="hidden" th:value="${itemE.potion.effect.duration}"
+                                   name="item.potion.effect.duration"/>
+                            <button class="buttonForm" type="submit">-</button>
+                        </form>
+                    </div>
+                    <span class="elementInLine numberP" th:text="${itemE.count}"></span>
+                    <div class="elementInLine">
+                        <form action="#" th:method="post" th:action="@{/orders/incCount}"
+                              th:object="${countChangerForm}">
+                            <input hidden="hidden" th:value="${itemE.potion.id}" name="item.potion.id"/>
+                            <input hidden="hidden" th:value="${itemE.potion.name}" name="item.potion.name"/>
+                            <input hidden="hidden" th:value="${itemE.potion.effect.id}" name="item.potion.effect.id"/>
+                            <input hidden="hidden" th:value="${itemE.potion.effect.name}"
+                                   name="item.potion.effect.name"/>
+                            <input hidden="hidden" th:value="${itemE.potion.effect.power}"
+                                   name="item.potion.effect.power"/>
+                            <input hidden="hidden" th:value="${itemE.potion.effect.duration}"
+                                   name="item.potion.effect.duration"/>
+                            <button class="buttonForm" type="submit">+</button>
+                        </form>
+                    </div>
+                </div>
             </td>
             <td>
                 <form action="#" th:method="post" th:action="@{/orders/removeCartItem}" th:object="${countChangerForm}">
@@ -63,7 +79,8 @@
                     <input hidden="hidden" th:value="${itemE.potion.effect.id}" name="item.potion.effect.id"/>
                     <input hidden="hidden" th:value="${itemE.potion.effect.name}" name="item.potion.effect.name"/>
                     <input hidden="hidden" th:value="${itemE.potion.effect.power}" name="item.potion.effect.power"/>
-                    <input hidden="hidden" th:value="${itemE.potion.effect.duration}" name="item.potion.effect.duration"/>
+                    <input hidden="hidden" th:value="${itemE.potion.effect.duration}"
+                           name="item.potion.effect.duration"/>
                     <button type="submit">Удалить</button>
                 </form>
             </td>
@@ -73,9 +90,9 @@
 </div>
 
 <div class="all-items">
-    <a href="#" class="buttons" id="potionsList">Список доступных зелий</a>
+    <button class="buttons" id="potionsList">Список доступных зелий</button>
     <div class="item-list">
-        <ul id="dropdownList">
+        <ul class="list1a" id="dropdownList">
             <li th:each="potionE : ${allPotions}">
                 <form th:method="post" th:action="@{/orders/addPotionToCart}" th:object="${countChangerForm}">
                     <input hidden="hidden" th:value="${potionE.id}" name="item.potion.id"/>
@@ -84,16 +101,19 @@
                     <input hidden="hidden" th:value="${potionE.effect.name}" name="item.potion.effect.name"/>
                     <input hidden="hidden" th:value="${potionE.effect.power}" name="item.potion.effect.power"/>
                     <input hidden="hidden" th:value="${potionE.effect.duration}" name="item.potion.effect.duration"/>
-                    <span th:text="${potionE.name}"></span>
-                    <button type="submit">Добавить</button>
+                    <div class="inLine">
+                        <span class="elementInLine" th:text="${potionE.name}"></span>
+                        <button class="elementInLine" type="submit">Добавить</button>
+                    </div>
+
                 </form>
             </li>
         </ul>
     </div>
 </div>
 
-<a href="#" class="buttons" id="createOrder">Оформить заказ</a>
-<a href="#" class="buttons" id="redirectBackButton">На главную</a>
+<button class="button" id="createOrder">Оформить заказ</button>
+<button class="button" id="redirectBackButton">На главную</button>
 
 <script th:src="@{/js/user/cartList.js}"></script>
 <script th:src="@{/js/user/orderFormPage.js}"></script>

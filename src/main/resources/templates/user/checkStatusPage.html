@@ -11,15 +11,17 @@
 
 <p>Введите номер вашего заказа:</p>
 
-<div class="text-field text-field_floating-3">
-    <form id="checkStatus" action="#" th:method="post" th:action="@{/orders/checkStatus}" th:object="${orderNumberForm}">
-        <input class="text-field__input" type="number" id="numberOrder" name="numberOrder" th:field="*{orderId}">
-        <label class="text-field__label" for="numberOrder">Номер заказа</label>
-        <h2 th:text="${status}"/>
-        <button type="submit" id="getStatusButton">Проверить статус заказа</button>
-<!--        <a href="#" class="buttons" id="getStatusButton">Проверить статус заказа</a>-->
-    </form>
-</div>
+
+<form id="checkStatus" action="#" th:method="post" th:action="@{/orders/checkStatus}" th:object="${orderNumberForm}">
+    <div class="text-field text-field_floating-3">
+        <input class="text-field__input" pattern="[0-9]*" id="orderId" name="orderId" placeholder="">
+        <label class="text-field__label" for="orderId">Номер заказа</label>
+    </div>
+    <h2 th:text="${status}"/>
+    <button type="submit" id="getStatusButton">Проверить статус заказа</button>
+    <!--        <a href="#" class="buttons" id="getStatusButton">Проверить статус заказа</a>-->
+</form>
+
 <button type="button" class="buttons" onclick="goTo('user/start')" id="redirectBackButton">На главную</button>
 
 <script th:src="@{/js/general/goto.js}"></script>

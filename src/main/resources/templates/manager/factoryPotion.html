@@ -22,6 +22,7 @@
                         <button class="elementInLine" type="submit">Проверить наличие ингредиентов</button>
                     </form>
                     <form action="#" th:method="post" th:action="@{/manager/cookPotion}" th:object="${potionNumberForm}">
+                        <input hidden="hidden" th:value="${potion.id}" name="potionId">
                         <button class="elementInLine" type="submit">Начать варить</button>
                     </form>
                 </div>

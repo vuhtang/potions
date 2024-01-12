@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <title>Warehouse</title>
     <link th:href="@{/styles/general/general.css}" rel="stylesheet"/>
-    <link th:href="@{/styles/user/start.css}" rel="stylesheet" />
+    <link th:href="@{/styles/manager/generalM.css}" rel="stylesheet" />
 </head>
 <body>
 <h1>Warehouse</h1>
@@ -30,15 +30,20 @@
     </tr>
     </tbody>
 </table>
-<div th:if="${epwPage.totalPages > 0}">
-    <a th:style="${epwPage.number > 0 ? '' : 'pointer-events: none'}"
+<div th:if="${epwPage.totalPages > 0}" class="buttonInLine">
+    <a class="button" th:style="${epwPage.number > 0 ? '' : 'pointer-events: none'}"
        th:href="@{/manager/warehouseIngredients(size=${epwPage.size}, page=${1})}">First</a>
-    <a th:style="${epwPage.number > 0 ? '' : 'pointer-events: none'}"
+    <a class="button" th:style="${epwPage.number > 0 ? '' : 'pointer-events: none'}"
        th:href="@{/manager/warehouseIngredients(size=${epwPage.size}, page=${epwPage.number})}">Prev</a>
-    <a th:style="${epwPage.number + 1 < epwPage.totalPages ? '' : 'pointer-events: none' }"
+    <a class="button" th:style="${epwPage.number + 1 < epwPage.totalPages ? '' : 'pointer-events: none' }"
        th:href="@{/manager/warehouseIngredients(size=${epwPage.size}, page=${epwPage.number + 2})}">Next</a>
-    <a th:style="${epwPage.number + 1 < epwPage.totalPages ? '' : 'pointer-events: none'}"
+    <a class="button" th:style="${epwPage.number + 1 < epwPage.totalPages ? '' : 'pointer-events: none'}"
        th:href="@{/manager/warehouseIngredients(size=${epwPage.size}, page=${epwPage.totalPages})}">Last</a>
 </div>
+
+<button type="button" class="buttons" onclick="goTo('manager/main')" id="redirectBackButton">На главную</button>
+
+<script th:src="@{/js/general/goto.js}"></script>
+
 </body>
 </html>

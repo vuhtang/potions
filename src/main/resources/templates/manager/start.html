@@ -12,13 +12,14 @@
     <p>Введите, пожалуйста, номер вашего пункта:</p>
 </div>
 
-<div class="text-field text-field_floating-3">
-    <form id="checkStatus" th:method="post" th:action="@{/manager/setEP}" th:object="${idEPform}">
-        <input class="text-field__input" type="number" id="epNumber"  th:field="*{idEP}">
-        <label class="text-field__label" for="epNumber">Номер пункта</label>
-        <button type="submit" class="buttons" id="setEPNumber">Вход</button>
-    </form>
-</div>
+
+<form id="checkStatus" th:method="post" th:action="@{/manager/setEP}" th:object="${idEPform}">
+    <div class="text-field text-field_floating-3">
+        <input class="text-field__input" pattern="[0-9]*" id="idEP" name="idEP" placeholder="">
+        <label class="text-field__label" for="idEP">Номер пункта</label>
+    </div>
+    <button type="submit" class="buttons" id="setEPNumber">Вход</button>
+</form>
 
 
 <script th:src="@{/js/manager/start.js}"></script>

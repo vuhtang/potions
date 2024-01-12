@@ -8,11 +8,11 @@
 </head>
 <body>
 <div class="welcome-block">
-    <h1><span th:text="${ep.getName()}"/></h1>
+    <h1><span th:text="${ep.name}"/></h1>
 
     <button onclick="goTo('manager/orderList')">Список активных заказов</button>
     <button onclick="goTo('manager/historyOrder')">История заказов</button>
-    <button onclick="goTo('manager/factoryPotion')">Производство зелей</button>
+    <button onclick="goTo('manager/factoryPotion')">Производство зелий</button>
     <button onclick="goTo('manager/orderIngredient')">Заказ ингредиентов</button>
     <button onclick="goTo('manager/warehouse')">Склад</button>
 

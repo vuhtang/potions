@@ -4,7 +4,8 @@
     <meta charset="UTF-8">
     <title>Warehouse</title>
     <link th:href="@{/styles/general/general.css}" rel="stylesheet"/>
-    <link th:href="@{/styles/user/start.css}" rel="stylesheet" />
+    <link th:href="@{/styles/manager/generalM.css}" rel="stylesheet"/>
+
 </head>
 <body>
 <h1>Warehouse</h1>
@@ -12,10 +13,15 @@
 
 <div class="links-container">
 
-<button type="button" class="buttons" onclick="goTo('manager/warehousePotions')" id="redirectStatusButton">Зелья</button>
-<button type="button" class="buttons" onclick="goTo('manager/warehouseIngredients')" id="redirectOrderButton">Ингредиенты</button>
+    <button type="button" class="buttons" onclick="goTo('manager/warehousePotions')" id="redirectStatusButton">Зелья
+    </button>
+    <button type="button" class="buttons" onclick="goTo('manager/warehouseIngredients')" id="redirectOrderButton">
+        Ингредиенты
+    </button>
+    <button type="button" class="buttons" onclick="goTo('manager/main')" id="redirectBackButton">На главную</button>
 
 </div>
+
 <script th:src="@{/js/general/goto.js}"></script>
 
 </body>
